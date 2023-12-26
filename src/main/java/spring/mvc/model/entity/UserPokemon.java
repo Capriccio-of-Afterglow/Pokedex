@@ -72,5 +72,6 @@ public class UserPokemon {
 		this.pokemonName = pokemonName;
 		this.typeId = typeId;
 		this.cp = cp;
+		
 	}
 }
