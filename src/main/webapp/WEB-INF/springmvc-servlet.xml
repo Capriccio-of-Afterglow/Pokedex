@@ -88,7 +88,7 @@
 	<!-- c3p0 pool -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/group_buy?serverTimezone=Asia/Taipei&amp;characterEncoding=utf-8&amp;useUnicode=true" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/pokedex?serverTimezone=Asia/Taipei&amp;characterEncoding=utf-8&amp;useUnicode=true" />
 		<property name="user" value="web" />
 		<property name="password" value="12345678" />
 		<property name="maxConnectionAge" value="300" /> <!-- -1 表示沒有限制 -->
@@ -115,16 +115,16 @@
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
     
     <!-- 定義攔截器 Bean -->
-    <bean id="loginInterceptor" class="spring.mvc.group_buy.interceptor.LoginInterceptor"/>
+    <bean id="loginInterceptor" class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>
 
     <!-- 配置攔截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/group_buy/**"/>
-            <mvc:exclude-mapping path="/group_buy/getcode"/>
-            <mvc:exclude-mapping path="/group_buy/login"/>
-            <mvc:exclude-mapping path="/group_buy/login_backend"/>
-            <mvc:exclude-mapping path="/group_buy/login/*"/>
+            <mvc:mapping path="/pokedex/**"/>
+            <mvc:exclude-mapping path="/pokedex/getcode"/>
+            <mvc:exclude-mapping path="/pokedex/login"/>
+            <mvc:exclude-mapping path="/pokedex/login_backend"/>
+            <mvc:exclude-mapping path="/pokedex/login/*"/>
             <bean class="spring.mvc.group_buy.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
