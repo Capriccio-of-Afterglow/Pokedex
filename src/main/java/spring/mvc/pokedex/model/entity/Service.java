@@ -1,4 +1,4 @@
-package spring.mvc.model.entity;
+package spring.mvc.pokedex.model.entity;
 
 public class Service {
 	private Integer serviceId;

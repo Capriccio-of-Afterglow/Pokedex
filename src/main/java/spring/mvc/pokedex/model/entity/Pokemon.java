@@ -1,4 +1,4 @@
-package spring.mvc.model.entity;
+package spring.mvc.pokedex.model.entity;
 
 /*
 1. 寶可夢
