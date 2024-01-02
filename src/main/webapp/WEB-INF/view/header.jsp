@@ -26,7 +26,7 @@
 	          <a class="nav-link text-dark" href="./page1.jsp">我的寶可夢</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link text-dark" href="#">寶可夢圖鑑</a>
+	          <a class="nav-link text-dark" href="#">寶可夢查詢</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link text-dark" href="#">個體分析</a>
