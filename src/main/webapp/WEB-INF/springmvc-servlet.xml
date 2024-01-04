@@ -117,7 +117,7 @@
     <!-- 定義攔截器 Bean -->
     <bean id="loginInterceptor" class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>
 
-    <!-- 配置攔截器 -->
+    <!-- 配置攔截器 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/pokedex/**"/>
@@ -125,7 +125,9 @@
             <mvc:exclude-mapping path="/pokedex/login"/>
             <mvc:exclude-mapping path="/pokedex/login_backend"/>
             <mvc:exclude-mapping path="/pokedex/login/*"/>
+            <mvc:exclude-mapping path="/pokedex/frontend/main"/>
             <bean class="spring.mvc.group_buy.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+    -->
 </beans>
