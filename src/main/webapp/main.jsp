@@ -55,7 +55,7 @@
 <div class="pokemon-container">
     <!-- Sample Pokemon Card -->
     <div class="pokemon-card">
-        <img class="pokemon-image" src="Pokedex\src\main\resources\static\images\0001.png" alt="Pokemon0001">
+        <img class="pokemon-image" src="/images/0001.png" alt="Pokemon0001">
         <h3>Pokemon 1</h3>
         <p>ID: 001</p>
         <p>屬性: 屬性1</p>
