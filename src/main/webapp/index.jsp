@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@ include file="/WEB-INF/views/header.jsp" %>
-
-首頁
-
-<%@ include file="/WEB-INF/views/footer.jsp" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			window.location.href='./mvc/frontend/main';
+		</script>
+	</head>
+	
+</html>
