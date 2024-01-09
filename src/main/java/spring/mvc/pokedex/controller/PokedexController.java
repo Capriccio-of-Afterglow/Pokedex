@@ -13,4 +13,9 @@ public class PokedexController {
 		return "pokedex/frontend/main";
 	}
 	
+	@GetMapping("/frontend/dex")
+	public String showdex() {
+		return "pokedex/frontend/dex";
+	}
+	
 }
