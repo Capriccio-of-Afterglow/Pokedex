@@ -15,7 +15,7 @@
         <input type="text" id="searchKeyword" placeholder="搜尋寶可夢">
         	<button type="button" class="btn btn-primary" onclick="searchPokemon()">搜尋寶可夢</button>
     	</div>
-    	<a href="/Pokedex/mvc/frontend/dex">
+    	<a href="./dex">
            <button type="button" class="btn btn-primary">進入寶可夢圖鑑</button>
         </a>
 	</div>
