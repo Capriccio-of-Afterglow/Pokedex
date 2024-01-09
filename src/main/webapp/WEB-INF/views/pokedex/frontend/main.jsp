@@ -5,7 +5,7 @@
     <div class="welcome-section text-center ">
         <h1>歡迎來到Pokedex</h1>
         <div class="pokemon-card">
-            <!-- 這裡應該插入動態生成的隨機寶可夢卡片 -->
+            <!-- 這裡插入動態生成的隨機寶可夢卡片 -->
             <img src="/Pokedex/images/0778.png" class="img-fluid mx-auto d-block" style="max-width: 500px;" alt="Pokemon Image">
             <h2>來尋找喜歡的寶可夢吧！</h2>
         </div>
