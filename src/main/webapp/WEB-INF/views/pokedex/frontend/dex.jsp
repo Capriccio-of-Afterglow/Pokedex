@@ -1,28 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="container">
-    <h2 class="text-center">寶可夢圖鑑</h2>
-
-    <!-- 搜尋欄位 -->
-    <div class="search-bar text-center">
-        <input type="text" id="searchInput" placeholder="搜尋寶可夢">
-        <button class="btn btn-primary" onclick="searchPokemon()">搜尋</button>
-    </div>
-
-    <!-- 寶可夢卡片區域 -->
-    <div class="pokemon-container">
-        <!-- Sample Pokemon Card -->
-        <div class="pokemon-card">
-            <img class="pokemon-image" src="/Pokedex/images/0001.png" alt="Pokemon0001">
-            <h3>Pokemon 1</h3>
-            <p>ID: 001</p>
-            <p>屬性: 屬性1</p>
-        </div>
-
-        <!-- Repeat the above card structure for each Pokemon -->
+    <!-- 圖鑑區域 -->
+    <div class="row">
+        <% for (int i = 1; i <= 9; i++) { %>
+            <div class="col-md-2 mb-4">
+                <a href="/Pokedex/pokemon?id=<%= i %>"> <!-- 將 href 設定為你的目標 URL -->
+                    <div class="card">
+                        <img class="card-img-top" src="/Pokedex/images/<%= String.format("%04d", i) %>.png" alt="Pokemon<%= String.format("%04d", i) %>">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Pokemon <%= i %></h5>
+                            <p class="card-text">ID: <%= String.format("%03d", i) %></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
     </div>
 </div>
 
