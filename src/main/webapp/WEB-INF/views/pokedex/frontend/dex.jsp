@@ -28,7 +28,7 @@
     <div class="row">
         <% for (int i = 1; i <= 25; i++) { %>
             <div class="col-md-2 mb-4">
-                <a href="/Pokedex/pokemon?id=<%= i %>" class="text-decoration-none text-dark"> 
+                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
                     <div class="card border border-3">
                         <img class="card-img-top" src="/Pokedex/images/<%= String.format("%04d", i) %>.png" alt="Pokemon<%= String.format("%04d", i) %>">
                         <div class="card-body text-center">
