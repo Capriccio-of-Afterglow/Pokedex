@@ -15,7 +15,7 @@ insert into type(name) values('草');
 insert into type(name) values('毒');
 
 -- 新增 寶可夢
-insert into pokemon(name,img) values('妙娃種子','0001.png');
+insert into pokemon(name,img) values('妙蛙種子','0001.png');
 
 -- 新增 寶可夢屬性
 insert into pokemon_type(pokemon_id, type_id) values(1,4);
