@@ -16,6 +16,7 @@
         <div class="col-md-6" style="width: 300px; margin-right: 0; margin-left: auto;">
             <!-- 假的屬性篩選器 -->
             <select id="filterSelect" class="form-select">
+		        <option value="" disabled selected hidden>請選擇寶可夢屬性</option>
                 <option value="fire">火屬性</option>
                 <option value="water">水屬性</option>
                 <option value="grass">草屬性</option>
