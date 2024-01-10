@@ -2,7 +2,29 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
-	<body>
+<style>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.pokemon-details {
+    display: flex;
+}
+
+.left-section {
+    flex: 1;
+}
+
+.right-section {
+    flex: 1;
+    margin-left: 20px; /* 調整右側部分與左側的間距 */
+}
+</style>
+
+<body>
 
 <div class="container">
     <div class="pokemon-details">
@@ -24,6 +46,9 @@
                 </p>
             </div>
             <div class="back-to-pokedex">
+            
+            	<button type="button" class="btn btn-primary">加入背包</button>
+            
                 <a href="./dex">
                  <button type="button" class="btn btn-primary">回到寶可夢圖鑑</button>
                 </a>
