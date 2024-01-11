@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-	
+public class Package {
+
 	Integer id;
 	
-	String name;
+	Integer userId;
 	
-	String password;
+	Integer pokemonId;
 	
-	Integer level;
+	Integer cp;
+	
 }

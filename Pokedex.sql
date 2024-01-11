@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `pokedex`.`user` (
   `id` INT NOT NULL auto_increment,
   `name` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
+  `level` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -53,11 +54,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `pokedex`.`package` ;
 
 CREATE TABLE IF NOT EXISTS `pokedex`.`package` (
-  `up_id` INT NOT NULL auto_increment,
+  `id` INT NOT NULL auto_increment,
   `user_id` INT NOT NULL,
   `pokemon_id` INT NOT NULL,
   `cp` INT NOT NULL,
-  PRIMARY KEY (`up_id`),
+  PRIMARY KEY (`id`),
   INDEX `up_user_id_idx` (`user_id` ASC) VISIBLE,
   INDEX `up_pokemon_id_idx` (`pokemon_id` ASC) VISIBLE,
   CONSTRAINT `up_user_id`
