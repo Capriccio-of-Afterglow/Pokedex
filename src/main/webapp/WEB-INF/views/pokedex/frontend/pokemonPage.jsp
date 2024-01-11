@@ -35,7 +35,7 @@
         </div>
         <div class="right-section">
             <h1 class="pokemon-name">Bulbasaur</h1>
-            <p class="pokemon-id">ID: 001</p>
+            <p class="pokemon-id">ID: 0001</p>
             <p class="pokemon-type">Type: Grass/Poison</p>
             <hr>
             <div class="pokemon-description">
