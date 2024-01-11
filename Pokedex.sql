@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `pokedex`.`pokemon` ;
 
 CREATE TABLE IF NOT EXISTS `pokedex`.`pokemon` (
-  `id` INT NOT NULL auto_increment,
+  `id` INT NOT NULL ,
   `name` VARCHAR(100) NOT NULL,
   `img` VARCHAR(1000) NOT NULL,
   PRIMARY KEY (`id`),
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `pokedex`.`type` ;
 
 CREATE TABLE IF NOT EXISTS `pokedex`.`type` (
-  `id` INT NOT NULL auto_increment,
+  `id` INT NOT NULL ,
   `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE(`name`))

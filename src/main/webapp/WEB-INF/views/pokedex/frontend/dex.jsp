@@ -39,6 +39,28 @@
                 </a>
             </div>
         <% } %>
+        <div class="col-md-2 mb-4">
+                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
+                    <div class="card border border-3">
+                        <img class="card-img-top" src="/Pokedex/images/0384.png" alt="Pokemon 0384">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">烈空座</h5>
+                            <p class="card-text">寶可夢編號:0384</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+             <div class="col-md-2 mb-4">
+                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
+                    <div class="card border border-3">
+                        <img class="card-img-top" src="/Pokedex/images/0778.png" alt="Pokemon 0778">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">謎擬Q</h5>
+                            <p class="card-text">寶可夢編號:0778</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
     </div>
 </div>
 
