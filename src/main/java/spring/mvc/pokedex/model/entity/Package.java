@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Package {
 
-	Integer id;
+	Integer PackageId;
 	
 	Integer userId;
 	

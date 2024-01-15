@@ -7,7 +7,7 @@ import spring.mvc.pokedex.model.entity.Pokemon;
 public interface PokemonDao {
 
 	// 查詢所有寶可夢
-	List<Pokemon> getAllPokemons();
+	List<Pokemon> findAllPokemons();
 	
 	// 新增寶可夢
 	void addPokemon(Pokemon pokemon);
