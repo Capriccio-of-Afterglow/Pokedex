@@ -20,7 +20,7 @@ public class UserDaoImplTest {
 		// 測試查詢功能
 		List<User> users = userDaoImpl.findAllUsers();
 		System.out.println(users);
-		/*
+		
 		
 		// 新增User
 		User addUser = new User();
@@ -29,7 +29,7 @@ public class UserDaoImplTest {
 		addUser.setLevel(2);
 		userDaoImpl.save(addUser);
 		System.out.println(addUser);
-			*/
+			
 		// 測試修改密碼
 		Integer userId = 1;
 		String newPassword = "123456";
