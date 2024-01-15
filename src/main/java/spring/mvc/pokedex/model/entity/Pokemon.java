@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pokemon {
 	
-	Integer id;
+	Integer pokemonId;
 	
-	String name;
+	String pokemonName;
 	
 	String img;
 	
