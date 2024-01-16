@@ -1,3 +1,4 @@
+
 package spring.mvc.pokedex.model.entity;
 
 import lombok.AllArgsConstructor;
