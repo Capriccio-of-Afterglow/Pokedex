@@ -15,4 +15,6 @@ public class Pokemon {
 	
 	String img;
 	
+	String description;
+	
 }

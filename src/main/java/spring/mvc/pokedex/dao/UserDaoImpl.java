@@ -52,12 +52,21 @@ public class UserDaoImpl implements UserDao {
         return rowsAffected;
 	}
 
+	
+
 	@Override
 	public Boolean updateUserPassword(Integer userId, String newPassword) {
 		String sql = "update user set password = ? where userId = ?";
 		int rowcount = jdbcTemplate.update(sql, newPassword, userId);
 		return rowcount > 0;
 
+	}
+	
+	@Override
+	public Boolean updateUserLevel(Integer userId, String newLevel) {
+		String sql = "update user set level = ? where userId = ?";
+		int rowcount = jdbcTemplate.update(sql, newLevel, userId);
+		return rowcount > 0;
 	}
 
 	@Override

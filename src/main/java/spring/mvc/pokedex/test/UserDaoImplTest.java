@@ -21,7 +21,7 @@ public class UserDaoImplTest {
 		List<User> users = userDaoImpl.findAllUsers();
 		System.out.println(users);
 		
-		
+		/*
 		// 新增User
 		User addUser = new User();
 		addUser.setUserName("user2");
@@ -29,13 +29,19 @@ public class UserDaoImplTest {
 		addUser.setLevel(2);
 		userDaoImpl.save(addUser);
 		System.out.println(addUser);
-			
+		
+		*/
 		// 測試修改密碼
-		Integer userId = 1;
-		String newPassword = "123456";
+		Integer userId = 4 ;
+		String newPassword = "456";
 		Boolean test1 = userDaoImpl.updateUserPassword(userId, newPassword);
 		System.out.println(test1);
 	
+		// 測試修改權限等級
+		userId = 4 ;
+		String newLevel = "2";
+		Boolean test4 = userDaoImpl.updateUserLevel(userId, newLevel);
+		System.out.println(test4);
 	
 		
 		// 測試透過 username 尋找user(單筆)

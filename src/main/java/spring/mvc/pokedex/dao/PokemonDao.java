@@ -6,28 +6,35 @@ import spring.mvc.pokedex.model.entity.Pokemon;
 
 public interface PokemonDao {
 
-	// 查詢所有寶可夢
+	// 1.查詢所有寶可夢
 	List<Pokemon> findAllPokemons();
 	
-	// 新增寶可夢
+	// 2.新增寶可夢
 	void addPokemon(Pokemon pokemon);
 	
-	//4. 根據寶可夢名稱查找寶可夢
+	//3. 根據寶可夢名稱查找寶可夢
 	Optional<Pokemon> findPokemonByPokemonName(String pokemonName);
 		
-	//5. 根據寶可夢ID查找寶可夢(單筆)
+	//4. 根據寶可夢ID查找寶可夢(單筆)
 	Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId);
 	
-	// 依照屬性列出寶可夢
-	List<Pokemon> getPokemonsBytype(String type);
+	// 依照屬性列出寶可夢 (獨立寫到屬性DAO)
+	//List<Pokemon> getPokemonsBytype(String type);
 		
-	// 查詢使用者擁有的寶可夢
+	// 將寶可夢新增進使用者的背包 (放到背包DAO)
+	
+	// 查詢使用者擁有的寶可夢(放到背包DAO)
 	List<Pokemon> getUserPokemons(int userId);
 	
-	// 修改寶可夢資料
+	// 修改使用者所擁有的寶可夢 (放到背包DAO)
+	
+	
+	// 刪除使用者所擁有的寶可夢(放到背包DAO)
+	
+	// 5.修改寶可夢資料
 	void updatePokemonAttributes(Pokemon pokemon);
 	
-	// 根據 ID 刪除寶可夢
+	// 6.根據 ID 刪除寶可夢
 	void deletePokemon(int pokemonId);
 	
 	
