@@ -116,5 +116,5 @@ select u.name,k.name, p.cp from user u, package p, pokemon k where
 u.id = p.user_id and k.id = p.pokemon_id;
 
 -- 根據 寶可夢ID 查詢牠的屬性
-select p.name,t.name from pokemon p , type t,pokemon_type pt where
-p.id =pt.pokemon_id and t.id = pt.type_id order by p.id; 
+select p.pokemonid,t.typename from pokemon p , type t,pokemon_type pt where
+p.pokemonId =pt.pokemon_id and t.typeId = pt.type_id order by p.pokemonid; 
