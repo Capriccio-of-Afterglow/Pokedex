@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import spring.mvc.pokedex.model.entity.Pokemon;
 import spring.mvc.pokedex.model.entity.Type;
+import spring.mvc.pokedex.model.entity.User;
 
 
 @Repository
@@ -52,34 +53,43 @@ public class PokemonDaoImpl implements PokemonDao {
 
 	@Override
 	public Optional<Pokemon> findPokemonByPokemonName(String pokemonName) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
+		 String sql = "select * from pokemon where pokemonname = ?";
+		  try {
+		        Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonName);
+		        return Optional.ofNullable(pokemon);
+		    } catch (EmptyResultDataAccessException e) {
+		        return Optional.empty();
+		    }
+		}
 
 	@Override
 	public Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
-
-//	@Override
-//	public List<Pokemon> getPokemonsBytype(String type) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
+		 String sql = "select * from pokemon where pokemonId = ?";
+		  try {
+		        Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonId);
+		        return Optional.ofNullable(pokemon);
+		    } catch (EmptyResultDataAccessException e) {
+		        return Optional.empty();
+		    }
+		}
 
 	@Override
-	public void updatePokemonAttributes(Pokemon pokemon) {
-		// TODO Auto-generated method stub
-		
+	public Boolean updatePokemonAttributes(Pokemon pokemon) {
+	    final String updatePokemonSql = "UPDATE pokemon SET pokemonName = ?, img = ?, description = ? WHERE pokemonId = ?";
+
+	    int rowsAffected = jdbcTemplate.update(updatePokemonSql, pokemon.getPokemonName(), pokemon.getImg(), pokemon.getDescription(), pokemon.getPokemonId());
+
+	    return rowsAffected > 0;
 	}
+
 
 	@Override
 	public Boolean deletePokemon(int pokemonId) {
-		return null;
-		// TODO Auto-generated method stub
-		
+	    final String deletePokemonSql = "DELETE FROM pokemon WHERE pokemonId = ?";
+
+	    int rowsAffected = jdbcTemplate.update(deletePokemonSql, pokemonId);
+
+	    return rowsAffected > 0;
 	}
 
 }
