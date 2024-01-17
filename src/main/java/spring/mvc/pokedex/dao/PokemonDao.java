@@ -10,7 +10,7 @@ public interface PokemonDao {
 	List<Pokemon> findAllPokemons();
 	
 	// 2.新增寶可夢
-	void addPokemon(Pokemon pokemon);
+	int addPokemon(Pokemon pokemon, List<Integer> typeIds);
 	
 	//3. 根據寶可夢名稱查找寶可夢
 	Optional<Pokemon> findPokemonByPokemonName(String pokemonName);

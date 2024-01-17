@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import spring.mvc.pokedex.model.entity.Pokemon;
+import spring.mvc.pokedex.model.entity.Type;
 
 
 @Repository
@@ -29,9 +30,24 @@ public class PokemonDaoImpl implements PokemonDao {
 	}
 
 	@Override
-	public void addPokemon(Pokemon pokemon) {
-		// TODO Auto-generated method stub
-		
+	public int addPokemon(Pokemon pokemon, List<Integer> typeIds) {
+	    final String Sql = "insert into pokemon(pokemonName, img, description) values (?,?,?) ";
+
+	    int rowsAffected = jdbcTemplate.update(Sql, pokemon.getPokemonName(), pokemon.getImg(), pokemon.getDescription());
+
+	    if (rowsAffected > 0) {
+	        // Fetch the generated pokemonId
+	        Integer pokemonId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+	        pokemon.setPokemonId(pokemonId);
+
+	        // Insert into Pokemon_Type for each typeId
+	        final String TypeSql = "insert into Pokemon_Type(pokemonId, typeId) values (?,?) ";
+	        for (Integer typeId : typeIds) {
+	            jdbcTemplate.update(TypeSql, pokemon.getPokemonId(), typeId);
+	        }
+	    }
+
+	    return rowsAffected;
 	}
 
 	@Override
