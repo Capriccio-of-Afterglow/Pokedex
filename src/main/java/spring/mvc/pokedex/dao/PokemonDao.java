@@ -10,7 +10,7 @@ public interface PokemonDao {
 	List<Pokemon> findAllPokemons();
 	
 	// 2.新增寶可夢
-	void addPokemon(Pokemon pokemon);
+	int addPokemon(Pokemon pokemon, List<Integer> typeIds);
 	
 	//3. 根據寶可夢名稱查找寶可夢
 	Optional<Pokemon> findPokemonByPokemonName(String pokemonName);
@@ -18,24 +18,11 @@ public interface PokemonDao {
 	//4. 根據寶可夢ID查找寶可夢(單筆)
 	Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId);
 	
-	// 依照屬性列出寶可夢 (獨立寫到屬性DAO)
-	//List<Pokemon> getPokemonsBytype(String type);
-		
-	// 將寶可夢新增進使用者的背包 (放到背包DAO)
-	
-	// 查詢使用者擁有的寶可夢(放到背包DAO)
-	List<Pokemon> getUserPokemons(int userId);
-	
-	// 修改使用者所擁有的寶可夢 (放到背包DAO)
-	
-	
-	// 刪除使用者所擁有的寶可夢(放到背包DAO)
-	
 	// 5.修改寶可夢資料
-	void updatePokemonAttributes(Pokemon pokemon);
+	Boolean updatePokemonAttributes(Pokemon pokemon);
 	
 	// 6.根據 ID 刪除寶可夢
-	void deletePokemon(int pokemonId);
+	Boolean deletePokemon(int pokemonId);
 	
 	
 	
