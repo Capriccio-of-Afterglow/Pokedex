@@ -52,11 +52,6 @@ public class PokemonDaoImpl implements PokemonDao {
 //		return null;
 //	}
 
-	@Override
-	public List<Pokemon> getUserPokemons(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void updatePokemonAttributes(Pokemon pokemon) {

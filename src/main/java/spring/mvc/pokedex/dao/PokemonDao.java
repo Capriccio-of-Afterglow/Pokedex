@@ -18,18 +18,9 @@ public interface PokemonDao {
 	//4. 根據寶可夢ID查找寶可夢(單筆)
 	Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId);
 	
-	// 依照屬性列出寶可夢 (獨立寫到屬性DAO)
+	// 依照屬性列出寶可夢 (獨立寫到屬性關聯表DAO)
 	//List<Pokemon> getPokemonsBytype(String type);
 		
-	// 將寶可夢新增進使用者的背包 (放到背包DAO)
-	
-	// 查詢使用者擁有的寶可夢(放到背包DAO)
-	List<Pokemon> getUserPokemons(int userId);
-	
-	// 修改使用者所擁有的寶可夢 (放到背包DAO)
-	
-	
-	// 刪除使用者所擁有的寶可夢(放到背包DAO)
 	
 	// 5.修改寶可夢資料
 	void updatePokemonAttributes(Pokemon pokemon);
