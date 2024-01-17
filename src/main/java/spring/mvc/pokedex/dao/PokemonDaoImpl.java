@@ -1,7 +1,10 @@
 package spring.mvc.pokedex.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -26,8 +30,30 @@ public class PokemonDaoImpl implements PokemonDao {
 	
 	@Override
 	public List<Pokemon> findAllPokemons() {
-		String sql = "SELECT pokemonId, pokemonName,img FROM pokemon";
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pokemon.class));
+	    String sql = "SELECT p.*, t.typeName FROM pokemon p " +
+	                 "INNER JOIN pokemon_type pt ON p.pokemonId = pt.pokemon_Id " +
+	                 "INNER JOIN type t ON pt.type_Id = t.typeId";
+
+	    return jdbcTemplate.query(sql, new PokemonMapper());
+	}
+
+	private static final class PokemonMapper implements RowMapper<Pokemon> {
+	    @Override
+	    public Pokemon mapRow(ResultSet rs, int rowNum) throws SQLException {
+	        Pokemon pokemon = new Pokemon();
+	        pokemon.setPokemonId(rs.getInt("pokemonId"));
+	        pokemon.setPokemonName(rs.getString("pokemonName"));
+	        pokemon.setImg(rs.getString("img"));
+	        pokemon.setDescription(rs.getString("description"));
+
+	        Type type = new Type();
+	        type.setTypeName(rs.getString("typeName"));
+
+	        // 假設 Pokemon 類別中有一個方法 setTypeId(List<Type> typeId)
+	        pokemon.setTypeId(Collections.singletonList(type));
+
+	        return pokemon;
+	    }
 	}
 
 	@Override
