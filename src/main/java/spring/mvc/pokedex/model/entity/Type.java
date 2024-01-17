@@ -9,7 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Type {
 
-	Integer TypeId;
+	Integer typeId;
 	
-	String TypeName;
+	String typeName;
+	
+	@Override
+    public String toString() {
+        return String.valueOf(typeId);
+    }
 }

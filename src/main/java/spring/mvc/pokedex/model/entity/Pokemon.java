@@ -19,10 +19,7 @@ public class Pokemon {
 	
 	String description;
 	
-	List<Type> typeId;
+	List<Type> types;
 	
-	public void setTypeId(List<Type> typeId) {
-        this.typeId = typeId;
-    }
 	
 }

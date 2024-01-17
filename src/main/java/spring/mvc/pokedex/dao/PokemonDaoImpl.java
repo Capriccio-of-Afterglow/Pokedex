@@ -1,28 +1,17 @@
 package spring.mvc.pokedex.dao;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import spring.mvc.pokedex.model.entity.Pokemon;
 import spring.mvc.pokedex.model.entity.Type;
-import spring.mvc.pokedex.model.entity.User;
 
 
 @Repository
@@ -37,6 +26,7 @@ public class PokemonDaoImpl implements PokemonDao {
         pokemon.setPokemonName(rs.getString("pokemonName"));
         pokemon.setImg(rs.getString("img"));
         pokemon.setDescription(rs.getString("description"));
+        
         return pokemon;
     };
 
@@ -63,7 +53,7 @@ public class PokemonDaoImpl implements PokemonDao {
             return type;
         }, pokemon.getPokemonId());
 
-        pokemon.setTypeId(types);
+        pokemon.setTypes(types);
     }
 
 
@@ -77,9 +67,10 @@ public class PokemonDaoImpl implements PokemonDao {
 	    if (rowsAffected > 0) {
 	        // Insert into Pokemon_Type for each typeId
 	        final String typeSql = "insert into Pokemon_Type(pokemon_Id, type_Id) values (?, ?)";
-	        for (Integer typeId : typeIds) {
-	            jdbcTemplate.update(typeSql, pokemon.getPokemonId(), typeId);
+	        for (Integer types : typeIds) {
+	            jdbcTemplate.update(typeSql, pokemon.getPokemonId(), types);
 	        }
+	       
 	    }
 
 	    return rowsAffected;
