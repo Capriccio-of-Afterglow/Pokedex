@@ -10,7 +10,7 @@ public interface UserDao {
 	List<User> findAllUsers();
 	
 	// 2.新增使用者
-	int save(User user);
+	int addUser(User user);
 	
 	// 3. 修改密碼
 	Boolean updateUserPassword(Integer userId, String newPassword);

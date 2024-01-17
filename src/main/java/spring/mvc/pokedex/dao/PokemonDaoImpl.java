@@ -60,7 +60,8 @@ public class PokemonDaoImpl implements PokemonDao {
 	}
 
 	@Override
-	public void deletePokemon(int pokemonId) {
+	public Boolean deletePokemon(int pokemonId) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

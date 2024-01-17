@@ -26,7 +26,7 @@ public interface PokemonDao {
 	void updatePokemonAttributes(Pokemon pokemon);
 	
 	// 6.根據 ID 刪除寶可夢
-	void deletePokemon(int pokemonId);
+	Boolean deletePokemon(int pokemonId);
 	
 	
 	

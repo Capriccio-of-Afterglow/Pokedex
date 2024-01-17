@@ -27,7 +27,7 @@ public class UserDaoImplTest {
 		addUser.setUserName("user2");
 		addUser.setPassword("456");
 		addUser.setLevel(2);
-		userDaoImpl.save(addUser);
+		userDaoImpl.addUser(addUser);
 		System.out.println(addUser);
 		
 		*/

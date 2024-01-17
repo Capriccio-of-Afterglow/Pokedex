@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int save(User user) {
+	public int addUser(User user) {
 		final String sql = "insert into user(userName, password, level) values (?,?,?) ";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
