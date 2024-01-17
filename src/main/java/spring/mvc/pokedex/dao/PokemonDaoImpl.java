@@ -4,8 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,35 +29,43 @@ import spring.mvc.pokedex.model.entity.User;
 public class PokemonDaoImpl implements PokemonDao {
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	@Override
-	public List<Pokemon> findAllPokemons() {
-	    String sql = "SELECT p.*, t.typeName FROM pokemon p " +
-	                 "INNER JOIN pokemon_type pt ON p.pokemonId = pt.pokemon_Id " +
-	                 "INNER JOIN type t ON pt.type_Id = t.typeId";
+    private JdbcTemplate jdbcTemplate;
 
-	    return jdbcTemplate.query(sql, new PokemonMapper());
-	}
+    private RowMapper<Pokemon> pokemonRowMapper = (ResultSet rs, int rowNum) -> {
+        Pokemon pokemon = new Pokemon();
+        pokemon.setPokemonId(rs.getInt("pokemonId"));
+        pokemon.setPokemonName(rs.getString("pokemonName"));
+        pokemon.setImg(rs.getString("img"));
+        pokemon.setDescription(rs.getString("description"));
+        return pokemon;
+    };
 
-	private static final class PokemonMapper implements RowMapper<Pokemon> {
-	    @Override
-	    public Pokemon mapRow(ResultSet rs, int rowNum) throws SQLException {
-	        Pokemon pokemon = new Pokemon();
-	        pokemon.setPokemonId(rs.getInt("pokemonId"));
-	        pokemon.setPokemonName(rs.getString("pokemonName"));
-	        pokemon.setImg(rs.getString("img"));
-	        pokemon.setDescription(rs.getString("description"));
+    @Override
+    public List<Pokemon> findAllPokemons() {
+        String sql = "SELECT * FROM pokemon";
+        List<Pokemon> pokemons = jdbcTemplate.query(sql, pokemonRowMapper);
 
-	        Type type = new Type();
-	        type.setTypeName(rs.getString("typeName"));
+        for (Pokemon pokemon : pokemons) {
+            setPokemonTypes(pokemon);
+        }
 
-	        // 假設 Pokemon 類別中有一個方法 setTypeId(List<Type> typeId)
-	        pokemon.setTypeId(Collections.singletonList(type));
+        return pokemons;
+    }
 
-	        return pokemon;
-	    }
-	}
+    private void setPokemonTypes(Pokemon pokemon) {
+        String sql = "SELECT type.typeId, type.typeName FROM type " +
+                     "INNER JOIN pokemon_type ON type.typeId = pokemon_type.type_id " +
+                     "WHERE pokemon_type.pokemon_id = ?";
+        List<Type> types = jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Type type = new Type();
+            type.setTypeId(rs.getInt("typeId"));
+            type.setTypeName(rs.getString("typeName"));
+            return type;
+        }, pokemon.getPokemonId());
+
+        pokemon.setTypeId(types);
+    }
+
 
 	@Override
 	public int addPokemon(Pokemon pokemon, List<Integer> typeIds) {
