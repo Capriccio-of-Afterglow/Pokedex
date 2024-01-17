@@ -69,19 +69,16 @@ public class PokemonDaoImpl implements PokemonDao {
 
 	@Override
 	public int addPokemon(Pokemon pokemon, List<Integer> typeIds) {
-	    final String Sql = "insert into pokemon(pokemonName, img, description) values (?,?,?) ";
-
-	    int rowsAffected = jdbcTemplate.update(Sql, pokemon.getPokemonName(), pokemon.getImg(), pokemon.getDescription());
+	    final String sql = "insert into pokemon(pokemonId, pokemonName, img, description) values (?, ?, ?, ?)";
+	    
+	    // 使用提供的 pokemonId 進行插入
+	    int rowsAffected = jdbcTemplate.update(sql, pokemon.getPokemonId(), pokemon.getPokemonName(), pokemon.getImg(), pokemon.getDescription());
 
 	    if (rowsAffected > 0) {
-	        // Fetch the generated pokemonId
-	        Integer pokemonId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-	        pokemon.setPokemonId(pokemonId);
-
 	        // Insert into Pokemon_Type for each typeId
-	        final String TypeSql = "insert into Pokemon_Type(pokemonId, typeId) values (?,?) ";
+	        final String typeSql = "insert into Pokemon_Type(pokemon_Id, type_Id) values (?, ?)";
 	        for (Integer typeId : typeIds) {
-	            jdbcTemplate.update(TypeSql, pokemon.getPokemonId(), typeId);
+	            jdbcTemplate.update(typeSql, pokemon.getPokemonId(), typeId);
 	        }
 	    }
 

@@ -21,4 +21,8 @@ public class Pokemon {
 	
 	List<Type> typeId;
 	
+	public void setTypeId(List<Type> typeId) {
+        this.typeId = typeId;
+    }
+	
 }
