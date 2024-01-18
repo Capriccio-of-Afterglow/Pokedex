@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
+import javax.lang.model.util.Types;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,6 +28,7 @@ public class PokemonDaoImpl implements PokemonDao {
         pokemon.setPokemonName(rs.getString("pokemonName"));
         pokemon.setImg(rs.getString("img"));
         pokemon.setDescription(rs.getString("description"));
+        ;
         
         return pokemon;
     };
@@ -81,6 +84,7 @@ public class PokemonDaoImpl implements PokemonDao {
 		 String sql = "select * from pokemon where pokemonname = ?";
 		  try {
 		        Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonName);
+		        
 		        return Optional.ofNullable(pokemon);
 		    } catch (EmptyResultDataAccessException e) {
 		        return Optional.empty();
@@ -110,8 +114,12 @@ public class PokemonDaoImpl implements PokemonDao {
 
 	@Override
 	public Boolean deletePokemon(int pokemonId) {
-	    final String deletePokemonSql = "DELETE FROM pokemon WHERE pokemonId = ?";
+	    // 刪除相應的 pokemon_type 表中的行
+	    final String deletePokemonTypeSql = "DELETE FROM pokemon_type WHERE pokemon_id = ?";
+	    jdbcTemplate.update(deletePokemonTypeSql, pokemonId);
 
+	    // 現在刪除 pokemon 表中的行
+	    final String deletePokemonSql = "DELETE FROM pokemon WHERE pokemonId = ?";
 	    int rowsAffected = jdbcTemplate.update(deletePokemonSql, pokemonId);
 
 	    return rowsAffected > 0;
