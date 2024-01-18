@@ -25,14 +25,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 				if(user.getLevel() == 2) {
 					return true; // 放行
 				} else {
-					response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/pokedex/login");
+					response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
 					return false; // 不放行
 				}
 			} 
 			return true; // 放行
 		}
 		// 未登入, 導入到登入頁面
-		response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/pokedex/login");
+		response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
 		return false; // 不放行
 	}
 

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="container p-3">
@@ -15,53 +17,41 @@
         </div>
         <div class="col-md-6" style="width: 300px; margin-right: 0; margin-left: auto;">
             <!-- 假的屬性篩選器 -->
-            <select id="filterSelect" class="form-select">
+            <select id="filterSelect" class="form-select" onchange="selectType(event.target.value)">
 		        <option value="" disabled selected hidden>請選擇寶可夢屬性</option>
-                <option value="fire">火屬性</option>
-                <option value="water">水屬性</option>
-                <option value="grass">草屬性</option>
+		        <c:forEach items="${ types }" var="type">
+		        	<option value="${ type.typeId }">${ type.typeName }</option>
+		        </c:forEach>
                 <!-- 添加其他屬性選項 -->
             </select>
         </div>
     </div>
     <!-- 圖鑑區域 -->
     <div class="row">
-        <% for (int i = 1; i <= 25; i++) { %>
-            <div class="col-md-2 mb-4">
-                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
-                    <div class="card border border-3">
-                        <img class="card-img-top" src="/Pokedex/images/<%= String.format("%04d", i) %>.png" alt="Pokemon<%= String.format("%04d", i) %>">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Pokemon <%= i %></h5>
-                            <p class="card-text">寶可夢編號: <%= String.format("%03d", i) %></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        <% } %>
-        <div class="col-md-2 mb-4">
-                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
-                    <div class="card border border-3">
-                        <img class="card-img-top" src="/Pokedex/images/0384.png" alt="Pokemon 0384">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">烈空座</h5>
-                            <p class="card-text">寶可夢編號:0384</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <c:forEach items="${ pokemons }" var="pokemon">
              <div class="col-md-2 mb-4">
                 <a href="./pokemonPage" class="text-decoration-none text-dark"> 
                     <div class="card border border-3">
-                        <img class="card-img-top" src="/Pokedex/images/0778.png" alt="Pokemon 0778">
+                        <img class="card-img-top" 
+                             src="/Pokedex/images/<fmt:formatNumber type="number" minIntegerDigits="4" groupingUsed="false" value="${pokemon.pokemonId}"/>.png" 
+                             alt="Pokemon${pokemon.pokemonId}">
                         <div class="card-body text-center">
-                            <h5 class="card-title">謎擬Q</h5>
-                            <p class="card-text">寶可夢編號:0778</p>
+                            <h5 class="card-title">${pokemon.pokemonName}</h5>
+                            <p class="card-text">寶可夢編號: ${pokemon.pokemonId}</p>
                         </div>
                     </div>
                 </a>
             </div>
+        </c:forEach>
     </div>
 </div>
+
+<script type="text/javascript">
+
+	function selectType(typeId) {
+		window.location.href = '/Pokedex/mvc/frontend/dex?typeId='+typeId;
+	}
+
+</script>
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>

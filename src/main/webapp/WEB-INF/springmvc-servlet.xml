@@ -115,19 +115,18 @@
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
     
     <!-- 定義攔截器 Bean -->
-    <bean id="loginInterceptor" class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>
+    <bean class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>
 
-    <!-- 配置攔截器 
+    <!-- 配置攔截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/pokedex/**"/>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/frontend/dex"/>
+            <mvc:exclude-mapping path="/frontend/main"/>
             <mvc:exclude-mapping path="/pokedex/getcode"/>
-            <mvc:exclude-mapping path="/pokedex/login"/>
-            <mvc:exclude-mapping path="/pokedex/login_backend"/>
-            <mvc:exclude-mapping path="/pokedex/login/*"/>
-            <mvc:exclude-mapping path="/pokedex/frontend/main"/>
-            <bean class="spring.mvc.group_buy.interceptor.LoginInterceptor"/>
+            <bean class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-    -->
+   
 </beans>

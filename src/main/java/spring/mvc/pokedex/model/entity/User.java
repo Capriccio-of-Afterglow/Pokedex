@@ -12,7 +12,7 @@ public class User {
 	
 	Integer userId;
 	
-	String userName;
+	String username;
 	
 	String password;
 	

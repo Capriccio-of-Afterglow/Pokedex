@@ -34,7 +34,7 @@ CREATE TABLE `pokeball` (
   KEY `up_pokemon_id_idx` (`pokemon_id`),
   CONSTRAINT `up_pokemon_id` FOREIGN KEY (`pokemon_id`) REFERENCES `pokemon` (`pokemonId`),
   CONSTRAINT `up_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `pokeball` (
 
 LOCK TABLES `pokeball` WRITE;
 /*!40000 ALTER TABLE `pokeball` DISABLE KEYS */;
-INSERT INTO `pokeball` VALUES (1,1,1,50),(2,1,1,30),(3,1,778,50);
+INSERT INTO `pokeball` (user_id,pokemon_id,cp) VALUES (1,1,50),(1,1,30),(1,778,50);
 /*!40000 ALTER TABLE `pokeball` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +140,7 @@ CREATE TABLE `user` (
   `level` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`userId`),
   UNIQUE KEY `name_UNIQUE` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user1','123',1);
+INSERT INTO `user`(userName,password,level) VALUES ('user1','123',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

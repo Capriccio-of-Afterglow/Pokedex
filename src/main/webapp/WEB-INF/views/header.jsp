@@ -23,7 +23,7 @@
 	          <a class="nav-link active text-dark" aria-current="page" href="/Pokedex/mvc/frontend/main">首頁</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link text-dark" href="./page1.jsp">我的寶可夢</a>
+	          <a class="nav-link text-dark" href="/Pokedex/mvc/myPokemon">我的寶可夢</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link text-dark" href="/Pokedex/mvc/frontend/dex">寶可夢圖鑑</a>
@@ -33,8 +33,8 @@
 	        </li>
 	      </ul>
 	    </div>
-	    <i class="bi bi-person-circle text-dark h5 mb-0 d-none d-md-block">${sessionScope.username}</i>
-	    <i class="bi bi-box-arrow-right text-dark ml-3" role="button" onclick="window.location.href='./logout'">Logout</i>
+	    <i class="bi bi-person-circle text-dark h5 mb-0 d-none d-md-block">${user.username}</i>
+	    <i class="bi bi-box-arrow-right text-dark ml-3" role="button" onclick="window.location.href='/Pokedex/mvc/logout'">Logout</i>
 	  </div>
 	</nav>
 	

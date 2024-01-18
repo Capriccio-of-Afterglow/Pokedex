@@ -5,7 +5,7 @@ select * from pokemon;
 select * from package;
 
 -- 新增 user
-insert into user(username,password,level) values('user1','123',1);
+insert into user(username,password,level) values('user1','$2a$10$ALMW99ZAl4idFotoBJNgv.EetqJPp2/B1fQeQ58KCQALi7fjsgsGa',1);
 
 -- 新增 屬性
 insert into type(id,name) values(1,'一般');
