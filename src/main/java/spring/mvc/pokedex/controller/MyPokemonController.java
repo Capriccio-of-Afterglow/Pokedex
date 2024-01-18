@@ -10,6 +10,6 @@ public class MyPokemonController {
 
 	@GetMapping
 	public String myPokemon() {
-		return "";
+		return "pokedex/frontend/myPokemon";
 	}
 }
