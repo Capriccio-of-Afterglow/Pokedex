@@ -12,7 +12,7 @@ public interface PokemonDao {
 	// 2.新增寶可夢
 	int addPokemon(Pokemon pokemon, List<Integer> typeIds);
 	
-	//3. 根據寶可夢名稱查找寶可夢
+	//3. 根據寶可夢名稱查找寶可夢(單筆)
 	Optional<Pokemon> findPokemonByPokemonName(String pokemonName);
 		
 	//4. 根據寶可夢ID查找寶可夢(單筆)

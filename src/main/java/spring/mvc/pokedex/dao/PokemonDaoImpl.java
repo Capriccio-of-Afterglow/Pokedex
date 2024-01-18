@@ -28,7 +28,7 @@ public class PokemonDaoImpl implements PokemonDao {
         pokemon.setPokemonName(rs.getString("pokemonName"));
         pokemon.setImg(rs.getString("img"));
         pokemon.setDescription(rs.getString("description"));
-        ;
+        
         
         return pokemon;
     };
@@ -73,7 +73,7 @@ public class PokemonDaoImpl implements PokemonDao {
 	        for (Integer types : typeIds) {
 	            jdbcTemplate.update(typeSql, pokemon.getPokemonId(), types);
 	        }
-	       
+	        
 	    }
 
 	    return rowsAffected;
@@ -84,7 +84,7 @@ public class PokemonDaoImpl implements PokemonDao {
 		 String sql = "select * from pokemon where pokemonname = ?";
 		  try {
 		        Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonName);
-		        
+		        setPokemonTypes(pokemon);
 		        return Optional.ofNullable(pokemon);
 		    } catch (EmptyResultDataAccessException e) {
 		        return Optional.empty();
@@ -96,6 +96,7 @@ public class PokemonDaoImpl implements PokemonDao {
 		 String sql = "select * from pokemon where pokemonId = ?";
 		  try {
 		        Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonId);
+		        setPokemonTypes(pokemon);
 		        return Optional.ofNullable(pokemon);
 		    } catch (EmptyResultDataAccessException e) {
 		        return Optional.empty();
@@ -117,6 +118,10 @@ public class PokemonDaoImpl implements PokemonDao {
 	    // 刪除相應的 pokemon_type 表中的行
 	    final String deletePokemonTypeSql = "DELETE FROM pokemon_type WHERE pokemon_id = ?";
 	    jdbcTemplate.update(deletePokemonTypeSql, pokemonId);
+	    
+	    // 刪除 pokeball 表中參照到指定 pokemonId 的行
+	    final String deletePokeballSql = "DELETE FROM pokeball WHERE pokemon_id = ?";
+	    jdbcTemplate.update(deletePokeballSql, pokemonId);
 
 	    // 現在刪除 pokemon 表中的行
 	    final String deletePokemonSql = "DELETE FROM pokemon WHERE pokemonId = ?";
