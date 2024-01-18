@@ -37,11 +37,11 @@ public static void main(String[] args) {
 //		Optional<Pokemon> test1 = pokemonDaoImpl.findPokemonByPokemonName(pokemonName);
 //		System.out.println(test1);
 //		
-//		// 測試透過ID查詢
-//		int pokemonId = 778 ;
-//		Optional<Pokemon> test2 = pokemonDaoImpl.findPokemonByPokemonId(pokemonId);
-//		System.out.println(test2);
-//		
+		// 測試透過ID查詢
+		int pokemonId = 778 ;
+		Optional<Pokemon> test2 = pokemonDaoImpl.findPokemonByPokemonId(pokemonId);
+		System.out.println(test2);
+		
 //		// 測試修改
 //		Pokemon upPokemon = new Pokemon();
 //		upPokemon.setPokemonId(25);
@@ -57,9 +57,9 @@ public static void main(String[] args) {
 //		System.out.println(test1);
 				
 		// 測試刪除
-		Integer pokemonId = 778;
-		pokemonDaoImpl.deletePokemon(pokemonId);
-		
+//		Integer pokemonId = 778;
+//		pokemonDaoImpl.deletePokemon(pokemonId);
+//		
 	}
 	
 }

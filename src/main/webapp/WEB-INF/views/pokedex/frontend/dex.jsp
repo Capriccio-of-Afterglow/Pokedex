@@ -19,10 +19,10 @@
             <!-- 假的屬性篩選器 -->
             <select id="filterSelect" class="form-select" onchange="selectType(event.target.value)">
 		        <option value="" disabled selected hidden>請選擇寶可夢屬性</option>
+		        	<option value="-1">全部</option>
 		        <c:forEach items="${ types }" var="type">
 		        	<option value="${ type.typeId }">${ type.typeName }</option>
 		        </c:forEach>
-                <!-- 添加其他屬性選項 -->
             </select>
         </div>
     </div>
@@ -30,7 +30,7 @@
     <div class="row">
         <c:forEach items="${ pokemons }" var="pokemon">
              <div class="col-md-2 mb-4">
-                <a href="./pokemonPage" class="text-decoration-none text-dark"> 
+                <a href="./pokemonPage?pokemonId=${pokemon.pokemonId}" class="text-decoration-none text-dark"> 
                     <div class="card border border-3">
                         <img class="card-img-top" 
                              src="/Pokedex/images/<fmt:formatNumber type="number" minIntegerDigits="4" groupingUsed="false" value="${pokemon.pokemonId}"/>.png" 

@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+
 <style>
 .container {
     display: flex;
@@ -24,39 +24,33 @@
 }
 </style>
 
-<body>
-
 <div class="container">
     <div class="pokemon-details">
         <div class="left-section">
             <div class="pokemon-image">
-                <img src="/Pokedex/images/0001.png" style="max-width: 500px;" alt="Pokemon Image">
+                <img src="/Pokedex/images/<c:out value="${pokemon.img}" />" style="max-width: 500px;" alt="Pokemon Image">
             </div>
         </div>
         <div class="right-section">
-            <h1 class="pokemon-name">Bulbasaur</h1>
-            <p class="pokemon-id">ID: 0001</p>
-            <p class="pokemon-type">Type: Grass/Poison</p>
+            <h1 class="pokemon-name">${pokemon.pokemonName}</h1>
+            <p class="pokemon-id">ID: ${pokemon.pokemonId}</p>
+            <p class="pokemon-type">Type:
+                <c:forEach var="type" items="${pokemon.types}">
+                    ${type.typeName}
+                </c:forEach>
+            </p>
             <hr>
             <div class="pokemon-description">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam vel tincidunt neque. Sed et tincidunt mi, vel fermentum risus.
-                    Sed quis augue non odio aliquet tempus. Integer auctor justo nec ultrices convallis.
-                </p>
+                <p>${pokemon.description}</p>
             </div>
             <div class="back-to-pokedex">
-            
-            	<button type="button" class="btn btn-primary">加入背包</button>
-            
+                <button type="button" class="btn btn-primary">加入背包</button>
                 <a href="./dex">
-                 <button type="button" class="btn btn-primary">回到寶可夢圖鑑</button>
+                    <button type="button" class="btn btn-primary">回到寶可夢圖鑑</button>
                 </a>
             </div>
         </div>
     </div>
 </div>
 
-</body>
 <%@ include file="/WEB-INF/views/footer.jsp" %>
-

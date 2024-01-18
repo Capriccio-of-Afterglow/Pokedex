@@ -25,6 +25,7 @@ public interface PokemonDao {
 	// 6.根據 ID 刪除寶可夢
 	Boolean deletePokemon(int pokemonId);
 	
+	// 7. 根據 typeId 找到相應的寶可夢
 	List<Pokemon> findAllPokemonsByTypeId(Integer typeId);
 
 }

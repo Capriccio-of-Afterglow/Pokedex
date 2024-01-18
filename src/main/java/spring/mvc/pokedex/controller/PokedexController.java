@@ -1,11 +1,13 @@
 package spring.mvc.pokedex.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.mvc.pokedex.dao.PokemonDao;
@@ -41,7 +43,7 @@ public class PokedexController {
 		model.addAttribute("types", types);
 		
 		List<Pokemon> pokemons;
-		if(typeId != null && typeId > 0) {
+		if(typeId != null && typeId > 0 && typeId < 19) {
 			pokemons = pokemonDao.findAllPokemonsByTypeId(typeId);
 		} else {
 			pokemons = pokemonDao.findAllPokemons();
@@ -52,8 +54,17 @@ public class PokedexController {
 	}
 	
 	@GetMapping("/frontend/pokemonPage")
-	public String showPokemon() {
-		return "pokedex/frontend/pokemonPage";
+	public String showPokemonPage(@RequestParam("pokemonId") int pokemonId, Model model) {
+	    // 根據 pokemonId 查詢寶可夢詳細資訊
+	    Optional<Pokemon> pokemon = pokemonDao.findPokemonByPokemonId(pokemonId);
+
+	    if (pokemon.isPresent()) {
+	        model.addAttribute("pokemon", pokemon.get());
+	        return "pokedex/frontend/pokemonPage";
+	    } else {
+	        // 處理 Pokemon 不存在的情況，例如轉發到錯誤頁面
+	        return "redirect:/error";
+	    }
 	}
 	
 	
