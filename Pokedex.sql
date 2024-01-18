@@ -149,7 +149,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user`(userName,password,level) VALUES ('user1','123',1);
+INSERT INTO `user`(userName,password,level) VALUES ('user1','$2a$10$ALMW99ZAl4idFotoBJNgv.EetqJPp2/B1fQeQ58KCQALi7fjsgsGa',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
