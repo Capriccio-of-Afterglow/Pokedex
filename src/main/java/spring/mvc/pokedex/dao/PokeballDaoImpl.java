@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import spring.mvc.pokedex.model.entity.Pokeball;
 import spring.mvc.pokedex.model.entity.Pokemon;
+import spring.mvc.pokedex.model.entity.Type;
 
 @Repository
 public class PokeballDaoImpl implements PokeballDao {
@@ -29,10 +31,10 @@ public class PokeballDaoImpl implements PokeballDao {
 	RowMapper<Pokeball> rowMapper = (ResultSet rs, int rowNum) -> {
 		Pokeball pokeball = new Pokeball();
 		pokeball.setPokeballId(rs.getInt("pokeballId"));
-		pokeball.setPokemonId(rs.getInt("pokemon_id"));
-		pokeball.setUserId(rs.getInt("user_id"));
+		pokeball.setPokemonId(rs.getInt("pokemonId"));
+		pokeball.setUserId(rs.getInt("userId"));
 		pokeball.setCp(rs.getInt("cp"));
-		Optional<Pokemon> pokemonOptional = pokemonDao.findPokemonByPokemonId(rs.getInt("pokemon_id"));
+		Optional<Pokemon> pokemonOptional = pokemonDao.findPokemonByPokemonId(rs.getInt("pokemonId"));
 		if(pokemonOptional.isPresent()) {
 			pokeball.setPokemon(pokemonOptional.get());
 		}
@@ -41,19 +43,44 @@ public class PokeballDaoImpl implements PokeballDao {
 
 	@Override
 	public List<Pokeball> findAllPokeballs() {
-		String sql = "SELECT pokeballId, user_id, pokemon_id, cp FROM pokeball";
+		String sql = "SELECT pokeballId, userId, pokemonId, cp FROM pokeball";
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 
 	@Override
 	public List<Pokeball> findUserPokeballsByUserId(int userId) {
-		String sql = "SELECT pokeballId, user_id, pokemon_id, cp FROM pokeball where user_id = ? ";
-		return jdbcTemplate.query(sql, rowMapper,userId);
+		String sql = "SELECT pokeballId, userId, pokemonId, cp FROM pokeball where userId = ? ";
+		
+		List<Pokeball> pokeballs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pokeball.class), userId);
+		pokeballs.forEach(this::setPokemonInPokeball);
+		return pokeballs;
+		
 	}
 
+	private void setPokemonTypes(Pokemon pokemon) {
+		String sql = "SELECT type.typeId, type.typeName FROM type "
+				+ "INNER JOIN pokemon_type ON type.typeId = pokemon_type.typeId "
+				+ "WHERE pokemon_type.pokemonId = ?";
+		List<Type> types = jdbcTemplate.query(sql, (rs, rowNum) -> {
+			Type type = new Type();
+			type.setTypeId(rs.getInt("typeId"));
+			type.setTypeName(rs.getString("typeName"));
+			return type;
+		}, pokemon.getPokemonId());
+
+		pokemon.setTypes(types);
+	}
+	private void setPokemonInPokeball(Pokeball pokeball) {
+		
+		String sql = "SELECT pokemonId, pokemonName, img, description FROM pokemon where pokemonId = ? ";
+		
+		Pokemon UsersPokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class),pokeball.getPokemonId());
+		setPokemonTypes(UsersPokemon);
+		pokeball.setPokemon(UsersPokemon);
+	}
 	@Override
 	public int addPokeball(Pokeball pokeball) {
-	    String sql = "insert into pokeball(user_id, pokemon_id, cp) values(?,?,?)";
+	    String sql = "insert into pokeball(userId, pokemonId, cp) values(?,?,?)";
 
 	    KeyHolder keyHolder = new GeneratedKeyHolder();
 	    int rowUpdated = jdbcTemplate.update(connection -> {
@@ -76,19 +103,19 @@ public class PokeballDaoImpl implements PokeballDao {
 
 	@Override
 	public List<Pokeball> findPokeballsByPokemonId(int pokemonId) {
-		String sql = "SELECT pokeballId, user_id, pokemon_id, cp FROM pokeball where pokemonId = ? ";
+		String sql = "SELECT pokeballId, userId, pokemonId, cp FROM pokeball where pokemonId = ? ";
 		return jdbcTemplate.query(sql, rowMapper,pokemonId);
 	}
 
 	@Override
 	public List<Pokeball> findPokeballsByUserIdAndPokemonId(int userId, int pokemonId) {
-		String sql = "SELECT pokeballId, user_id, pokemon_id, cp FROM pokeball where user_id=? AND pokemonId = ? ";
+		String sql = "SELECT pokeballId, userId, pokemonId, cp FROM pokeball where userId=? AND pokemonId = ? ";
 		return jdbcTemplate.query(sql, rowMapper,userId,pokemonId);
 	}
 
 	@Override
 	public Optional<Pokeball> findPokeballById(int pokeballId) {
-		String sql = "SELECT pokeballId, user_id, pokemon_id, cp FROM pokeball where pokeballId = ? ";
+		String sql = "SELECT pokeballId, userId, pokemonId, cp FROM pokeball where pokeballId = ? ";
 		try {
 			Pokeball pokeball = jdbcTemplate.queryForObject(sql, rowMapper, pokeballId);
 			return Optional.ofNullable(pokeball);

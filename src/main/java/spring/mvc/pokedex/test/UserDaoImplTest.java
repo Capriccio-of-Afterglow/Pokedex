@@ -7,7 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import spring.mvc.pokedex.dao.PokeballDao;
+import spring.mvc.pokedex.dao.PokeballDaoImpl;
 import spring.mvc.pokedex.dao.UserDaoImpl;
+import spring.mvc.pokedex.model.entity.Pokeball;
 import spring.mvc.pokedex.model.entity.User;
 
 public class UserDaoImplTest {
@@ -17,6 +20,7 @@ public class UserDaoImplTest {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("/WEB-INF/springmvc-servlet.xml");
 		
 		UserDaoImpl userDaoImpl= ctx.getBean("userDaoImpl",UserDaoImpl.class);
+		PokeballDaoImpl pokeballDaoImpl= ctx.getBean("pokeballDaoImpl",PokeballDaoImpl.class);
 		
 		// 測試查詢功能
 //		List<User> users = userDaoImpl.findAllUsers();
@@ -51,6 +55,10 @@ public class UserDaoImplTest {
 //		Integer userId = 2;
 //		Optional<User> test3 = userDaoImpl.findUserById(userId);
 //		System.out.println(test3);
+		
+		Integer userId = 1;
+		List<Pokeball> test1 = pokeballDaoImpl.findUserPokeballsByUserId(userId);
+		System.out.println(test1);
 	}
 
 }

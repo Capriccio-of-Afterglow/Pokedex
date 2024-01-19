@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-MyPokemon
+敬啟期待😂
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>

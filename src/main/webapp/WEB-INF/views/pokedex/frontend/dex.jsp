@@ -16,7 +16,7 @@
 			</div>
         </div>
         <div class="col-md-6" style="width: 300px; margin-right: 0; margin-left: auto;">
-            <!-- 假的屬性篩選器 -->
+            <!-- 屬性篩選器 -->
             <select id="filterSelect" class="form-select" onchange="selectType(event.target.value)">
 		        <option value="" disabled selected hidden>請選擇寶可夢屬性</option>
 		        	<option value="-1">全部</option>

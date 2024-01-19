@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import spring.mvc.pokedex.model.entity.Pokeball;
+import spring.mvc.pokedex.model.entity.Pokemon;
 
 public interface PokeballDao {
 
@@ -30,4 +31,5 @@ public interface PokeballDao {
 
 	// 8.根據寶可夢球ID刪除寶可夢
 	int deletePokeball(int pokeballId);
+	
 }

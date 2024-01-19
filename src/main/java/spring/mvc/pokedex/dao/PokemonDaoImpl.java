@@ -45,8 +45,8 @@ public class PokemonDaoImpl implements PokemonDao {
 
 	private void setPokemonTypes(Pokemon pokemon) {
 		String sql = "SELECT type.typeId, type.typeName FROM type "
-				+ "INNER JOIN pokemon_type ON type.typeId = pokemon_type.type_id "
-				+ "WHERE pokemon_type.pokemon_id = ?";
+				+ "INNER JOIN pokemon_type ON type.typeId = pokemon_type.typeId "
+				+ "WHERE pokemon_type.pokemonId = ?";
 		List<Type> types = jdbcTemplate.query(sql, (rs, rowNum) -> {
 			Type type = new Type();
 			type.setTypeId(rs.getInt("typeId"));
@@ -67,7 +67,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
 		if (rowsAffected > 0) {
 			// Insert into Pokemon_Type for each typeId
-			final String typeSql = "insert into Pokemon_Type(pokemon_Id, type_Id) values (?, ?)";
+			final String typeSql = "insert into Pokemon_Type(pokemonId, typeId) values (?, ?)";
 			for (Integer types : typeIds) {
 				jdbcTemplate.update(typeSql, pokemon.getPokemonId(), types);
 			}
@@ -114,11 +114,11 @@ public class PokemonDaoImpl implements PokemonDao {
 	@Override
 	public Boolean deletePokemon(int pokemonId) {
 		// 刪除相應的 pokemon_type 表中的行
-		final String deletePokemonTypeSql = "DELETE FROM pokemon_type WHERE pokemon_id = ?";
+		final String deletePokemonTypeSql = "DELETE FROM pokemon_type WHERE pokemonId = ?";
 		jdbcTemplate.update(deletePokemonTypeSql, pokemonId);
 
 		// 刪除 pokeball 表中參照到指定 pokemonId 的行
-		final String deletePokeballSql = "DELETE FROM pokeball WHERE pokemon_id = ?";
+		final String deletePokeballSql = "DELETE FROM pokeball WHERE pokemonId = ?";
 		jdbcTemplate.update(deletePokeballSql, pokemonId);
 
 		// 現在刪除 pokemon 表中的行
@@ -130,7 +130,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
 	@Override
 	public List<Pokemon> findAllPokemonsByTypeId(Integer typeId) {
-		String sql = "select p.pokemonId, p.pokemonName, p.img, p.description from pokemon p, pokemon_type t where p.pokemonId = t.pokemon_id and t.type_id = ? order by 1";
+		String sql = "select p.pokemonId, p.pokemonName, p.img, p.description from pokemon p, pokemon_type t where p.pokemonId = t.pokemonId and t.typeId = ? order by 1";
 		List<Pokemon> pokemons = jdbcTemplate.query(sql, pokemonRowMapper,typeId);
 		for (Pokemon pokemon : pokemons) {
 			setPokemonTypes(pokemon);

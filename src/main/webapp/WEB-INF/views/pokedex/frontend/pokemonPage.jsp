@@ -34,15 +34,19 @@
         <div class="right-section">
             <h1 class="pokemon-name">${pokemon.pokemonName}</h1>
             <p class="pokemon-id">ID: ${pokemon.pokemonId}</p>
-            <p class="pokemon-type">Type:
+            <p class="pokemon-type">Type: 
+            
                 <c:forEach var="type" items="${pokemon.types}">
-                    ${type.typeName}
-                </c:forEach>
+                <a href="./dex?typeId=${ type.typeId }">
+           			 <button type="button" class="btn btn-outline-secondary">${ type.typeName }</button>
+           		 </a>
+        		</c:forEach>
+        	
             </p>
             <hr>
             <div class="pokemon-description">
                 <p>${pokemon.description}</p>
-            </div>
+        </div>
             <div class="back-to-pokedex">
                 <button type="button" class="btn btn-primary">加入背包</button>
                 <a href="./dex">
