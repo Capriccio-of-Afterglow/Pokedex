@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if(session.getAttribute("user") != null) {
 			User user = (User)session.getAttribute("user");
 			// 路徑的權限檢查
-			// "/group_buy/backend", user level = 2 才可以進入
+			// "/pokedex/backend", user level = 2 才可以進入
 			System.out.println("RequestURI = " + request.getRequestURI());
 			if(request.getRequestURI().contains("/pokedex/backend")) { // 後台
 				if(user.getLevel() == 2) {

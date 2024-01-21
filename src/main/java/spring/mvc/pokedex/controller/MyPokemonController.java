@@ -3,6 +3,8 @@ package spring.mvc.pokedex.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,6 @@ import spring.mvc.pokedex.model.entity.Pokeball;
 import spring.mvc.pokedex.model.entity.Pokemon;
 
 @Controller
-@RequestMapping("/myPokemon")
 public class MyPokemonController {
 	
 	@Autowired
@@ -29,8 +30,9 @@ public class MyPokemonController {
 	@Autowired
 	PokeballDao pokeballDao;
 
-	@GetMapping("/showMyPokemom")
-	public String myPokemon(@RequestParam("userId") int userId, Model model) {
+	@GetMapping("/frontend/myPokemom")
+	public String myPokemon(@RequestParam("userId") int userId, Model model, HttpSession session) {
+		session.setAttribute("userId", userId);
 		List<Pokeball> pokeball = pokeballDao.findUserPokeballsByUserId(userId);
 		model.addAttribute("pokeball", pokeball);
 		return "pokedex/frontend/myPokemon";
