@@ -122,6 +122,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/register"/>
             <mvc:exclude-mapping path="/frontend/dex"/>
             <mvc:exclude-mapping path="/frontend/pokemonPage"/>
             <mvc:exclude-mapping path="/frontend/main"/>

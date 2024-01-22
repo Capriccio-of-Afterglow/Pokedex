@@ -32,7 +32,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 350px;
         }
 
         label {
@@ -59,6 +59,10 @@
             🔑 密碼: <input type="password" id="password" name="password" placeholder="請輸入密碼" required /><p />
             <p />
             <button type="submit" class="btn btn-primary" >註冊</button>
+            <a href="/Pokedex/mvc/frontend/main">
+	            <button type="button" class="btn btn-primary" >返回首頁</button>
+	        </a>
+            
         </fieldset>
     </form>
 

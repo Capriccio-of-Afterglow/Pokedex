@@ -26,7 +26,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 350px;
         }
 
         label {
@@ -61,7 +61,7 @@
 					<p />
 					<button type="submit" class="pure-button pure-button-primary">前台登入</button>
 					<button type="button" class="pure-button pure-button-primary" onclick="loginBackend()" >後台登入</button>
-					 <a href="/Pokedex/mvc/frontend/main">
+					 <a href="/Pokedex/mvc/register">
 						<button type="button" class="pure-button pure-button-primary" >註冊</button>
 					</a>
 					 <div>
