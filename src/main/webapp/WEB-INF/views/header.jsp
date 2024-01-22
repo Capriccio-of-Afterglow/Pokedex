@@ -33,8 +33,8 @@
 	        </li>
 	      </ul>
 	    </div>
-	    <i class="bi bi-person-circle text-dark h5 mb-0 d-none d-md-block">${user.username}</i>
 	    <i class="bi bi-box-arrow-right text-dark ml-3" role="button" onclick="window.location.href='/Pokedex/mvc/logout'">Logout</i>
+	    <i class="bi bi-person-circle text-dark h5 mb-0 d-none d-md-block px-3">${user.username}</i>
 	  </div>
 	</nav>
 	
