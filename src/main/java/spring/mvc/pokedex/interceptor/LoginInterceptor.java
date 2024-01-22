@@ -13,27 +13,34 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		HttpSession session = request.getSession();
-		// 檢查 session 中是否有 user 的物件資料(意味著用戶已經登入)
-		if(session.getAttribute("user") != null) {
-			User user = (User)session.getAttribute("user");
-			// 路徑的權限檢查
-			// "/pokedex/backend", user level = 2 才可以進入
-			System.out.println("RequestURI = " + request.getRequestURI());
-			if(request.getRequestURI().contains("/pokedex/backend")) { // 後台
-				if(user.getLevel() == 2) {
-					return true; // 放行
-				} else {
-					response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
-					return false; // 不放行
-				}
-			} 
-			return true; // 放行
-		}
-		// 未登入, 導入到登入頁面
-		response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
-		return false; // 不放行
+	        throws Exception {
+	    HttpSession session = request.getSession();
+	    // 檢查 session 中是否有 user 的物件資料(意味著用戶已經登入)
+	    if (session.getAttribute("user") != null) {
+	        User user = (User) session.getAttribute("user");
+	        // 路徑的權限檢查
+	        // "/pokedex/backend", user level = 2 才可以進入
+	        System.out.println("RequestURI = " + request.getRequestURI());
+	        if (request.getRequestURI().contains("/pokedex/backend")) { // 後台
+	            if (user.getLevel() == 2) {
+	                return true; // 放行
+	            } else {
+	                response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
+	                return false; // 不放行
+	            }
+	        }
+
+	        // 如果請求的 URI 包含 /mypokemonpage，但用戶已經登入，則放行
+	        if (request.getRequestURI().contains("/mypokemonpage")) {
+	            return true; // 放行
+	        }
+
+	        return true; // 其他情況放行
+	    }
+
+	    // 未登入, 導入到登入頁面
+	    response.sendRedirect(request.getServletContext().getContextPath() + "/mvc/login");
+	    return false; // 不放行
 	}
 
 	@Override

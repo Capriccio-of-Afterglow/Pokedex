@@ -17,8 +17,10 @@ import spring.mvc.pokedex.dao.PokemonDao;
 import spring.mvc.pokedex.dao.TypeDao;
 import spring.mvc.pokedex.model.entity.Pokeball;
 import spring.mvc.pokedex.model.entity.Pokemon;
+import spring.mvc.pokedex.model.entity.Type;
 
 @Controller
+@RequestMapping("/myPokemon")
 public class MyPokemonController {
 	
 	@Autowired
@@ -30,11 +32,12 @@ public class MyPokemonController {
 	@Autowired
 	PokeballDao pokeballDao;
 
-	@GetMapping("/frontend/myPokemom")
+	@GetMapping("/myPokemonPage")
 	public String myPokemon(@RequestParam("userId") int userId, Model model, HttpSession session) {
-		session.setAttribute("userId", userId);
-		List<Pokeball> pokeball = pokeballDao.findUserPokeballsByUserId(userId);
-		model.addAttribute("pokeball", pokeball);
-		return "pokedex/frontend/myPokemon";
+	    session.setAttribute("userId", userId);
+	    List<Pokeball> pokeball = pokeballDao.findUserPokeballsByUserId(userId);
+	    model.addAttribute("pokeball", pokeball);
+	    return "pokedex/frontend/myPokemon";
 	}
+	
 }
