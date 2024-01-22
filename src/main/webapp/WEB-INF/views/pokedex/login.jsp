@@ -61,7 +61,7 @@
 					<p />
 					<button type="submit" class="pure-button pure-button-primary">前台登入</button>
 					<button type="button" class="pure-button pure-button-primary" onclick="loginBackend()" >後台登入</button>
-					 <a href="/Pokedex/mvc/register">
+					 <a href="/Pokedex/mvc/register/registerPage">
 						<button type="button" class="pure-button pure-button-primary" >註冊</button>
 					</a>
 					 <div>
