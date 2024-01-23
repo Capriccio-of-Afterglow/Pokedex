@@ -23,15 +23,15 @@ public static void main(String[] args) {
 		//List<Pokeball> pokeballs = pokeballDaoImpl.findAllPokeballs();
 		//System.out.println(pokeballs);
 		
-		List<Pokeball> pokeballs = pokeballDaoImpl.findUserPokeballsByUserId(1);
-		System.out.println(pokeballs);
-		
-		//Pokeball pokeball = new Pokeball();
-		//pokeball.setUserId(1);
-		//pokeball.setPokemonId(25);
-		//pokeball.setCp(new Random().nextInt(101));
-		//int updatedRow = pokeballDaoImpl.addPokeball(pokeball);
-		//System.out.printf("Updated Row=%d,Pokeball Id=%d%n",updatedRow,pokeball.getPokeballId());
+//		List<Pokeball> pokeballs = pokeballDaoImpl.findUserPokeballsByUserId(1);
+//		System.out.println(pokeballs);
+//		
+		Pokeball pokeball = new Pokeball();
+		pokeball.setUserId(1);
+		pokeball.setPokemonId(25);
+		pokeball.setCp(new Random().nextInt(101));
+		int updatedRow = pokeballDaoImpl.addPokeball(pokeball);
+		System.out.printf("Updated Row=%d,Pokeball Id=%d%n",updatedRow,pokeball.getPokeballId());
 	}
 	
 }
