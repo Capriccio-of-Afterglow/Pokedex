@@ -23,8 +23,8 @@ public static void main(String[] args) {
 		//List<Pokeball> pokeballs = pokeballDaoImpl.findAllPokeballs();
 		//System.out.println(pokeballs);
 		
-		//List<Pokeball> pokeballs = pokeballDaoImpl.findUserPokeballsByUserId(1);
-		//System.out.println(pokeballs.size());
+		List<Pokeball> pokeballs = pokeballDaoImpl.findUserPokeballsByUserId(1);
+		System.out.println(pokeballs);
 		
 		//Pokeball pokeball = new Pokeball();
 		//pokeball.setUserId(1);

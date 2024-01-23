@@ -23,7 +23,7 @@
 	          <a class="nav-link active text-dark" aria-current="page" href="/Pokedex/mvc/frontend/main">首頁</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link text-dark" href="/Pokedex/mvc/myPokemon/myPokemonPage">我的寶可夢</a>
+	          <a class="nav-link text-dark" href="/Pokedex/mvc/myPokemon/${user.userId}">我的寶可夢</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link text-dark" href="/Pokedex/mvc/frontend/dex">寶可夢圖鑑</a>

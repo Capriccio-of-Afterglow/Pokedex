@@ -6,25 +6,25 @@
 <div class="container p-3">
 	<h1 class="text-center">持有寶可夢</h1>
 
-	<c:forEach items="${pokeballs}" var="pokeball">
+	<c:forEach items="${pokeballs}" var="pokeballs">
 		<div class="col-md-12 mb-4">
-			<h2>Pokeball ID: ${pokeball.pokeballId}</h2>
+			<h2>Pokeball ID: ${pokeballs.pokeballId}</h2>
 			<div class="row">
-				<c:forEach items="${pokeball.pokemon}" var="pokemon">
+			
 					<div class="col-md-2 mb-4">
-						<a href="./pokemonPage?pokemonId=${pokemon.pokemonId}" class="text-decoration-none text-dark">
+						<a href="./pokemonPage?pokemonId=${pokeballs.pokemon.pokemonId}" class="text-decoration-none text-dark">
 							<div class="card border border-3">
 								<img class="card-img-top"
-									src="/Pokedex/images/<fmt:formatNumber type='number' minIntegerDigits='4' groupingUsed='false' value='${pokemon.pokemonId}'/>.png"
-									alt="Pokemon${pokemon.pokemonId}">
+									src="/Pokedex/images/<fmt:formatNumber type='number' minIntegerDigits='4' groupingUsed='false' value='${pokeballs.pokemon.pokemonId}'/>.png"
+									alt="Pokemon${pokeballs.pokemon.pokemonId}">
 								<div class="card-body text-center">
-									<h5 class="card-title">${pokemon.pokemonName}</h5>
-									<p class="card-text">寶可夢編號: ${pokemon.pokemonId}</p>
+									<h5 class="card-title">${pokeballs.pokemon.pokemonName}</h5>
+									<p class="card-text">寶可夢編號: ${pokeballs.pokemon.pokemonId}</p>
 								</div>
 							</div>
 						</a>
 					</div>
-				</c:forEach>
+			
 			</div>
 		</div>
 	</c:forEach>

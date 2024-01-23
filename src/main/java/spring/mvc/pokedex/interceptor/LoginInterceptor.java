@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	        }
 
 	        // 如果請求的 URI 包含 /mypokemonpage，但用戶已經登入，則放行
-	        if (request.getRequestURI().contains("/mypokemonpage")) {
+	        if (request.getRequestURI().contains("/myPokemon")) {
 	            return true; // 放行
 	        }
 
