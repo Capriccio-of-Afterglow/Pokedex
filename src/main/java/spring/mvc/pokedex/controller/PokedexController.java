@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.mvc.pokedex.dao.PokeballDao;
@@ -22,6 +23,7 @@ import spring.mvc.pokedex.model.entity.Pokemon;
 import spring.mvc.pokedex.model.entity.Type;
 
 @Controller
+@RequestMapping("/frontend")
 public class PokedexController {
 
 	@Autowired
@@ -33,7 +35,7 @@ public class PokedexController {
 	@Autowired
 	PokeballDao pokeballDao;
 	
-	@GetMapping("/frontend/main")
+	@GetMapping("/main")
 	public String showmain() {
 		return "pokedex/frontend/main";
 	}
@@ -45,7 +47,7 @@ public class PokedexController {
 	 * @param typeId
 	 * @return
 	 */
-	@GetMapping("/frontend/dex")
+	@GetMapping("/dex")
 	public String showdex(Model model, @RequestParam(name = "typeId", required = false) Integer typeId) {
 	    List<Type> types = typeDao.findAllTypes();
 	    model.addAttribute("types", types);
@@ -60,7 +62,7 @@ public class PokedexController {
 
 	    return "pokedex/frontend/dex";
 	}
-	@GetMapping("/frontend/dex/page/{pokemonId}")
+	@GetMapping("/dex/page/{pokemonId}")
 	public String showPokemonPage(@PathVariable("pokemonId") int pokemonId, Model model) {
 	    // 根據 pokemonId 查詢寶可夢詳細資訊
 	    Optional<Pokemon> pokemon = pokemonDao.findPokemonByPokemonId(pokemonId);
@@ -74,20 +76,29 @@ public class PokedexController {
 	    }
 	}
 	@PostMapping("/addToPokeball")
-	public String addToPokeball(@RequestParam("pokemonId") int pokemonId, HttpSession session) {
-	    // 這裡寫加入 pokeball 的邏輯，使用 session 中的 userId 來連結到該使用者的 pokeball
-	    int userId = (int) session.getAttribute("userId");
-	    
-	    Pokeball pokeball = new Pokeball();
-		pokeball.setUserId(userId);
-		pokeball.setPokemonId(pokemonId);
-		pokeball.setCp(new Random().nextInt(101));
-		
-		pokeballDao.addPokeball(pokeball);
+	public String addToPokeball(@RequestParam("pokemonId") int pokemonId, HttpSession session,Model model) {
+		Integer userIdObj = (Integer) session.getAttribute("userId");
+		if (userIdObj != null) {
+		    int userId = userIdObj.intValue();
 
-	    // 重新導向到原本的寶可夢詳細資訊頁面
-	    return "redirect:/pokemon/pokemonPage?pokemonId=" + pokemonId;
+		    // 這裡寫加入 pokeball 的邏輯，使用 session 中的 userId 來連結到該使用者的 pokeball
+		    Pokeball pokeball = new Pokeball();
+		    pokeball.setUserId(userId);
+		    pokeball.setPokemonId(pokemonId);
+		    pokeball.setCp(new Random().nextInt(101));
+
+		    pokeballDao.addPokeball(pokeball);
+
+		    // 將成功信息存入 Model
+	        model.addAttribute("successMessage", "成功放入背包！");
+	        model.addAttribute("addedPokemon", pokeball);
+
+		    // 重新導向到原本的寶可夢詳細資訊頁面
+		    return "redirect:/mvc/frontend/dex/page/" + pokemonId;
+		} else {
+		    // 在這裡處理 userId 為 null 的情況，例如重定向到登入頁面
+		    return "redirect:/mvc/login";
+		}
 	}
-	
 	
 }

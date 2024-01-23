@@ -18,6 +18,7 @@
 							alt="Pokemon${pokeball.pokemon.pokemonId}">
 						<div class="card-body text-center">
 							<h5 class="card-title">${pokeball.pokemon.pokemonName}</h5>
+							<h5 class="card-cp">CP值： ${pokeball.cp}</h5>
 							<p class="card-text">寶可夢編號: ${pokeball.pokemon.pokemonId}</p>
 						</div>
 					</a>

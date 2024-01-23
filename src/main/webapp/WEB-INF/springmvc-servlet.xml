@@ -124,7 +124,7 @@
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/register/*"/>
             <mvc:exclude-mapping path="/frontend/dex"/>
-            <mvc:exclude-mapping path="/frontend/pokemonPage"/>
+            <mvc:exclude-mapping path="/frontend/dex/page/*"/>
             <mvc:exclude-mapping path="/frontend/main"/>
             <mvc:exclude-mapping path="/pokedex/getcode"/>
             <bean class="spring.mvc.pokedex.interceptor.LoginInterceptor"/>

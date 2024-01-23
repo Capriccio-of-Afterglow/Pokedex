@@ -51,10 +51,11 @@
 				<p>${pokemon.description}</p>
 			</div>
 			<div class="back-to-pokedex">
-				<form action="./addToPokeball" method="post">
+				<form action="/Pokedex/mvc/frontend/addToPokeball" method="post">
 					<input type="hidden" name="pokemonId" value="${pokemon.pokemonId}">
 					<button type="submit" class="btn btn-primary">加入背包</button>
 				</form>
+				
 				<a href="/Pokedex/mvc/frontend/dex">
 					<button type="button" class="btn btn-primary">回到寶可夢圖鑑</button>
 				</a>
