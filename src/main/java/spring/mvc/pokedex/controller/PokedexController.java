@@ -26,6 +26,7 @@ import spring.mvc.pokedex.dao.TypeDao;
 import spring.mvc.pokedex.model.entity.Pokeball;
 import spring.mvc.pokedex.model.entity.Pokemon;
 import spring.mvc.pokedex.model.entity.Type;
+import spring.mvc.pokedex.model.entity.User;
 
 @Controller
 @RequestMapping("/frontend")
@@ -102,9 +103,10 @@ public class PokedexController {
 	public ResponseEntity<Map<String, Object>> addToPokeball(@PathVariable("pokemonId") int pokemonId, HttpSession session) {
 	    Map<String, Object> response = new HashMap<>();
 
-	    Integer userIdObj = (Integer) session.getAttribute("userId");
-	    if (userIdObj != null) {
-	        int userId = userIdObj.intValue();
+	    User user = (User) session.getAttribute("user");
+
+	    if (user != null) {
+	        int userId = user.getUserId();
 
 	        // 這裡寫加入 pokeball 的邏輯，使用 session 中的 userId 來連結到該使用者的 pokeball
 	        Pokeball pokeball = new Pokeball();

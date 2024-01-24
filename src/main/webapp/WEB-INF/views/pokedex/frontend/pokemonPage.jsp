@@ -75,15 +75,27 @@ function addToPokeball() {
         type: "POST",
         url: "/Pokedex/mvc/frontend/pokeball/" + pokemonId,
         success: function(response) {
-            // 使用 SweetAlert2 顯示成功訊息
-            Swal.fire({
-                icon: 'success',
-                title: '成功',
-                text: '已加入背包！',
-            }).then((result) => {
-                // 如果需要在 SweetAlert2 的確認按鈕點擊後執行其他操作，可以在這裡添加相應的代碼
-                console.log('SweetAlert2 確認按鈕被點擊');
-            });
+            if (response.success) {
+                // 使用 SweetAlert2 顯示成功訊息
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    text: '已加入背包！',
+                }).then((result) => {
+                    // 如果需要在 SweetAlert2 的確認按鈕點擊後執行其他操作，可以在這裡添加相應的代碼
+                    console.log('SweetAlert2 確認按鈕被點擊');
+                });
+            } else {
+                // 使用 SweetAlert2 顯示錯誤訊息
+                Swal.fire({
+                    icon: 'error',
+                    title: '錯誤',
+                    text: '請先登入',
+                }).then((result) => {
+                    // 如果需要在 SweetAlert2 的確認按鈕點擊後執行其他操作，可以在這裡添加相應的代碼
+                    console.log('SweetAlert2 確認按鈕被點擊');
+                });
+            }
         },
         error: function(error) {
             // 使用 SweetAlert2 顯示錯誤訊息
