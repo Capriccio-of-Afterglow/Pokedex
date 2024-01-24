@@ -59,7 +59,7 @@
         var keyword = encodeURIComponent($('#searchKeyword').val());
 
         // 動態生成 URL 並導航
-        window.location.href = './search?keyword=' + keyword;
+        window.location.href = './dex/search?keyword=' + keyword;
     }
 </script>
 

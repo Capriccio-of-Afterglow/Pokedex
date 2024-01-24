@@ -38,11 +38,6 @@
 	  </div>
 	</nav>
 	
-	<script>
-    function searchPokemon() {
-        // 在這裡添加搜尋寶可夢的功能，使用 input 欄位的值（document.getElementById('searchKeyword').value）
-        // 連結到對應的寶可夢網頁
-    	}
-	</script>
+	
 </body>
 </html>

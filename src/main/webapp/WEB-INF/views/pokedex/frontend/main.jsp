@@ -15,7 +15,7 @@
 		<!-- 搜尋框的 HTML 元素 -->
 		<input type="text" id="searchKeyword" placeholder="搜尋寶可夢">
 		<button type="button" class="btn btn-primary"
-			onclick="searchPokemon()">搜尋寶可夢</button>
+			onclick="searchPokemonInMain()">搜尋寶可夢</button>
 	</div>
 	<a href="./dex">
 		<button type="button" class="btn btn-primary">進入寶可夢圖鑑</button>
@@ -24,7 +24,7 @@
 
 
 <script>
-    function searchPokemon() {
+    function searchPokemonInMain() {
         // 獲取搜尋框的值
         var keyword = encodeURIComponent($('#searchKeyword').val());
 
