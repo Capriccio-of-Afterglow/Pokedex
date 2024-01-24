@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/header.jsp"%>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <style>
 .container {
