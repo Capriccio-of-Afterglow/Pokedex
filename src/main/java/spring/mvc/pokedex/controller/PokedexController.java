@@ -1,12 +1,16 @@
 package spring.mvc.pokedex.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.mvc.pokedex.dao.PokeballDao;
 import spring.mvc.pokedex.dao.PokemonDao;
@@ -91,31 +96,35 @@ public class PokedexController {
 	    }
 	}
 	
-	
-	@PostMapping("/addToPokeball")
-	public String addToPokeball(@RequestParam("pokemonId") int pokemonId, HttpSession session,Model model) {
-		Integer userIdObj = (Integer) session.getAttribute("userId");
-		if (userIdObj != null) {
-		    int userId = userIdObj.intValue();
+	// 使用ajax
+	@PostMapping("/pokeball/{pokemonId}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> addToPokeball(@PathVariable("pokemonId") int pokemonId, HttpSession session) {
+	    Map<String, Object> response = new HashMap<>();
 
-		    // 這裡寫加入 pokeball 的邏輯，使用 session 中的 userId 來連結到該使用者的 pokeball
-		    Pokeball pokeball = new Pokeball();
-		    pokeball.setUserId(userId);
-		    pokeball.setPokemonId(pokemonId);
-		    pokeball.setCp(new Random().nextInt(101));
+	    Integer userIdObj = (Integer) session.getAttribute("userId");
+	    if (userIdObj != null) {
+	        int userId = userIdObj.intValue();
 
-		    pokeballDao.addPokeball(pokeball);
+	        // 這裡寫加入 pokeball 的邏輯，使用 session 中的 userId 來連結到該使用者的 pokeball
+	        Pokeball pokeball = new Pokeball();
+	        pokeball.setUserId(userId);
+	        pokeball.setPokemonId(pokemonId);
+	        pokeball.setCp(new Random().nextInt(101));
 
-		    // 將成功信息存入 Model
-	        model.addAttribute("successMessage", "成功放入背包！");
-	        model.addAttribute("addedPokemon", pokeball);
+	        pokeballDao.addPokeball(pokeball);
 
-		    // 重新導向到原本的寶可夢詳細資訊頁面
-		    return "redirect:/mvc/frontend/dex/page/" + pokemonId;
-		} else {
-		    // 在這裡處理 userId 為 null 的情況，例如重定向到登入頁面
-		    return "redirect:/mvc/login";
-		}
+	        response.put("success", true);
+	        response.put("message", "成功放入背包！");
+	        response.put("addedPokemon", pokeball);
+
+	        return ResponseEntity.ok(response);
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "使用者未登入");
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+	    }
 	}
+
 	
 }
