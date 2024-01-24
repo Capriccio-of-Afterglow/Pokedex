@@ -10,10 +10,12 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <!-- 搜尋框 -->
-            <div class="input-group mb-3" style="width: 300px; margin-right: auto; margin-left: 0;">
-			  <input type="text" class="form-control" placeholder="請輸入要搜尋的寶可夢名稱" aria-label="Recipient's username" aria-describedby="basic-addon2">
-			  <button class="btn btn-primary" type="button" id="button-addon2">搜尋</button>
-			</div>
+            <div class="search-bar" style="padding: 15px;">
+		<!-- 搜尋框的 HTML 元素 -->
+		<input type="text" id="searchKeyword" style="width: 200px;" placeholder="搜尋寶可夢">
+		<button type="button" class="btn btn-primary"
+			onclick="searchPokemon()">搜尋寶可夢</button>
+	</div>
         </div>
         <div class="col-md-6" style="width: 300px; margin-right: 0; margin-left: auto;">
             <!-- 屬性篩選器 -->
@@ -52,6 +54,13 @@
 		window.location.href = '/Pokedex/mvc/frontend/dex?typeId='+typeId;
 	}
 
+    function searchPokemon() {
+        // 獲取搜尋框的值
+        var keyword = encodeURIComponent($('#searchKeyword').val());
+
+        // 動態生成 URL 並導航
+        window.location.href = './search?keyword=' + keyword;
+    }
 </script>
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>

@@ -62,6 +62,21 @@ public class PokedexController {
 
 	    return "pokedex/frontend/dex";
 	}
+	
+	 @GetMapping("/dex/search")
+	    public String searchPokemons(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+	        if (keyword != null && !keyword.isEmpty()) {
+	            List<Pokemon> searchResults = pokemonDao.findPokemonByPokemonName(keyword);
+	            model.addAttribute("pokemons", searchResults);
+	        } else {
+	            // 如果關鍵字為空，可以處理成顯示全部的邏輯
+	            List<Pokemon> allPokemons = pokemonDao.findAllPokemons();
+	            model.addAttribute("pokemons", allPokemons);
+	        }
+	        return "pokedex/frontend/dex";
+	    }
+	 
+	 
 	@GetMapping("/dex/page/{pokemonId}")
 	public String showPokemonPage(@PathVariable("pokemonId") int pokemonId, Model model) {
 	    // 根據 pokemonId 查詢寶可夢詳細資訊
@@ -75,6 +90,8 @@ public class PokedexController {
 	        return "redirect:/error";
 	    }
 	}
+	
+	
 	@PostMapping("/addToPokeball")
 	public String addToPokeball(@RequestParam("pokemonId") int pokemonId, HttpSession session,Model model) {
 		Integer userIdObj = (Integer) session.getAttribute("userId");

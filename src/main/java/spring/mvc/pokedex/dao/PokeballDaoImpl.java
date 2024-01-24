@@ -126,7 +126,7 @@ public class PokeballDaoImpl implements PokeballDao {
 
 	@Override
 	public int deletePokeball(int pokeballId) {
-		String sql = "Delete pokeball where pokeballId = ? ";
+		String sql = "DELETE FROM pokeball WHERE pokeballId = ?";
 		return jdbcTemplate.update(sql, pokeballId);
 	}
 

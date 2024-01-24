@@ -14,7 +14,7 @@ public interface PokemonDao {
 	int addPokemon(Pokemon pokemon, List<Integer> typeIds);
 
 	// 3. 根據寶可夢名稱查找寶可夢(單筆)
-	Optional<Pokemon> findPokemonByPokemonName(String pokemonName);
+	List<Pokemon> findPokemonByPokemonName(String pokemonName);
 
 	// 4. 根據寶可夢ID查找寶可夢(單筆)
 	Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId);

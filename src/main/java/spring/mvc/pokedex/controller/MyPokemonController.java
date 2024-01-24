@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,4 +49,18 @@ public class MyPokemonController {
 	    return "pokedex/frontend/myPokemon";
 	}
 	
+	
+	@PostMapping("/{userId}/{pokeballId}/updateCP")
+	public String updateCP(@PathVariable("pokeballId") int pokeballId, @RequestParam("newCp") Integer newCp,
+			 			   @PathVariable("userId") int userId)  {
+		pokeballDao.updatePokemonCp(pokeballId,newCp);
+	    return "redirect:/mvc/myPokemon/{userId}";
+	}
+
+	@PostMapping("/{userId}/{pokeballId}/deletePokeball")
+	public String deletePokeball(@PathVariable("pokeballId") int pokeballId,
+            					 @PathVariable("userId") int userId)  {
+		    pokeballDao.deletePokeball(pokeballId);
+		    return "redirect:/mvc/myPokemon/{userId}";
+	}
 }

@@ -1,6 +1,7 @@
 package spring.mvc.pokedex.dao;
 
 import java.sql.ResultSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,16 +79,22 @@ public class PokemonDaoImpl implements PokemonDao {
 	}
 
 	@Override
-	public Optional<Pokemon> findPokemonByPokemonName(String pokemonName) {
-		String sql = "select * from pokemon where pokemonname = ?";
-		try {
-			Pokemon pokemon = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pokemon.class), pokemonName);
-			setPokemonTypes(pokemon);
-			return Optional.ofNullable(pokemon);
-		} catch (EmptyResultDataAccessException e) {
-			return Optional.empty();
+	public List<Pokemon> findPokemonByPokemonName(String pokemonName) {
+		 String sql = "SELECT * FROM pokemon WHERE pokemonname LIKE ?";
+		    try {
+		        // 使用 % 通配符構建模糊搜尋的 SQL 語句
+		        String searchPattern = "%" + pokemonName + "%";
+
+		        List<Pokemon> pokemons = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pokemon.class), searchPattern);
+
+		        // 遍歷結果集，設置寶可夢的類型
+		        pokemons.forEach(this::setPokemonTypes);
+
+		        return pokemons;
+		    } catch (EmptyResultDataAccessException e) {
+		        return Collections.emptyList();
+		    }
 		}
-	}
 
 	@Override
 	public Optional<Pokemon> findPokemonByPokemonId(Integer pokemonId) {
