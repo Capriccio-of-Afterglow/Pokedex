@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +34,17 @@
 	        </li>
 	      </ul>
 	    </div>
-	    <i class="bi bi-box-arrow-right text-dark ml-3" role="button" onclick="window.location.href='/Pokedex/mvc/logout'">登入/登出</i>
 	    <i class="bi bi-person-circle text-dark h5 mb-0 d-none d-md-block px-3">${user.username}</i>
+	    <c:choose>
+                <c:when test="${empty user}">
+                    <!-- 使用者未登入，顯示登入按鈕 -->
+                    <i class="bi bi-box-arrow-right text-dark ml-3" role="button" onclick="window.location.href='/Pokedex/mvc/login'">登入</i>
+                </c:when>
+                <c:otherwise>
+                    <!-- 使用者已登入，顯示登出按鈕 -->
+                    <i class="bi bi-box-arrow-left text-dark ml-3" role="button" onclick="window.location.href='/Pokedex/mvc/logout'">登出</i>
+                </c:otherwise>
+            </c:choose>
 	  </div>
 	</nav>
 	
