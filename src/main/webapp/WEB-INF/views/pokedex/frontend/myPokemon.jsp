@@ -40,22 +40,21 @@
 							<div class="modal-body">
 								<p>${pokeball.pokemon.description}</p>
 
-								<!-- 表單開始 -->
-								<form id="pokemonForm" method="post"
-									action="./${pokeball.userId}/${pokeball.pokeballId}/updateCP">
-									<!-- 添加一個用於輸入新 CP 的文本框 -->
-									<label for="newCp">修改CP: </label> <input type="text" id="newCp"
-										name="newCp">
-									<!-- 提交按鈕 -->
-									<button type="submit" class="btn btn-primary">保存變更</button>
+								<!-- 更新 CP 表單 -->
+								<form id="updateCPForm${pokeball.pokeballId}">
+									<label for="newCp${pokeball.pokeballId}">修改CP: </label> <input
+										type="text" id="newCp${pokeball.pokeballId}" name="newCp">
+
+									<button type="button" class="btn btn-primary"
+										onclick="updateCP(${pokeball.userId}, ${pokeball.pokeballId})">保存變更</button>
 								</form>
 
 							</div>
 							<div class="modal-footer">
-								<!-- 刪除按鈕表單 -->
-								<form method="post"
-									action="./${pokeball.userId}/${pokeball.pokeballId}/deletePokeball">
-									<button type="submit" class="btn btn-danger">刪除此寶可夢</button>
+								<!-- 刪除 Pokeball 表單 -->
+								<form id="deletePokeballForm${pokeball.pokeballId}">
+									<button type="button" class="btn btn-danger"
+										onclick="deletePokeball(${pokeball.userId}, ${pokeball.pokeballId})">刪除此寶可夢</button>
 								</form>
 
 								<!-- 關閉按鈕 -->
@@ -70,4 +69,87 @@
 	</div>
 </div>
 
+<script>
+function updateCP(userId, pokeballId) {
+    var newCp = $("#newCp" + pokeballId).val();
+
+    $.ajax({
+        type: "POST",
+        url: "/Pokedex/mvc/myPokemon/" + userId + "/" + pokeballId + "/updateCP",
+        data: { newCp: newCp },
+        success: function(response) {
+        	if (response.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'CP 更新成功！',
+                }).then(() => {
+                    // 重新加載頁面
+                    location.reload(true);
+                });
+            }  else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'CP 更新失敗',
+                    text: response.message,
+                });
+            }
+        },
+        error: function(error) {
+            Swal.fire({
+                icon: 'error',
+                title: '發生錯誤',
+                text: error.statusText,
+            });
+        }
+    });
+}
+
+function deletePokeball(userId, pokeballId) {
+    // 使用 SweetAlert2 顯示確認對話框
+    Swal.fire({
+        icon: 'warning',
+        title: '確定要刪除這個寶可夢嗎？',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: '確定刪除',
+        cancelButtonText: '取消'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // 如果使用者確認要刪除，再執行刪除操作
+            $.ajax({
+                type: "POST",
+                url: "/Pokedex/mvc/myPokemon/" + userId + "/" + pokeballId + "/deletePokeball",
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '寶可夢刪除成功！',
+                        }).then(() => {
+                            // 重新加載頁面
+                            location.reload(true);
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '寶可夢刪除失敗',
+                            text: response.message,
+                        });
+                    }
+                },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '發生錯誤',
+                        text: error.statusText,
+                    });
+                }
+            });
+        }
+        // 如果使用者取消刪除，不執行任何操作
+    });
+}
+
+
+</script>
 <%@ include file="/WEB-INF/views/footer.jsp"%>

@@ -1,11 +1,14 @@
 package spring.mvc.pokedex.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,16 +54,45 @@ public class MyPokemonController {
 	
 	
 	@PostMapping("/{userId}/{pokeballId}/updateCP")
-	public String updateCP(@PathVariable("pokeballId") int pokeballId, @RequestParam("newCp") Integer newCp,
-			 			   @PathVariable("userId") int userId)  {
-		pokeballDao.updatePokemonCp(pokeballId,newCp);
-	    return "redirect:/mvc/myPokemon/{userId}";
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> updateCP(@PathVariable("pokeballId") int pokeballId,
+	                                                   @RequestParam("newCp") Integer newCp,
+	                                                   @PathVariable("userId") int userId) {
+	    Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        // 更新 CP 的邏輯
+	        pokeballDao.updatePokemonCp(pokeballId, newCp);
+
+	        response.put("success", true);
+	        response.put("message", "CP 更新成功");
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "CP 更新失敗：" + e.getMessage());
+	    }
+
+	    return ResponseEntity.ok(response);
 	}
 
+
 	@PostMapping("/{userId}/{pokeballId}/deletePokeball")
-	public String deletePokeball(@PathVariable("pokeballId") int pokeballId,
-            					 @PathVariable("userId") int userId)  {
-		    pokeballDao.deletePokeball(pokeballId);
-		    return "redirect:/mvc/myPokemon/{userId}";
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> deletePokeball(@PathVariable("pokeballId") int pokeballId,
+	                                                          @PathVariable("userId") int userId) {
+	    Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        // 刪除 Pokeball 的邏輯
+	        pokeballDao.deletePokeball(pokeballId);
+
+	        response.put("success", true);
+	        response.put("message", "Pokeball 刪除成功");
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "Pokeball 刪除失敗：" + e.getMessage());
+	    }
+
+	    return ResponseEntity.ok(response);
 	}
+
 }
