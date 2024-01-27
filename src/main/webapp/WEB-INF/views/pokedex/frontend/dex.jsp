@@ -54,13 +54,13 @@
 		window.location.href = '/Pokedex/mvc/frontend/dex?typeId='+typeId;
 	}
 
-    function searchPokemon() {
-        // 獲取搜尋框的值
-        var keyword = encodeURIComponent($('#searchKeyword').val());
+	function searchPokemon() {
+	    // 獲取搜尋框的值
+	    var keyword = encodeURIComponent($('#searchKeyword').val());
 
-        // 動態生成 URL 並導航
-        window.location.href = './dex/search?keyword=' + keyword;
-    }
+	    // 動態生成 URL 並導航
+	    window.location.href = '/Pokedex/mvc/frontend/dex/search?keyword=' + keyword;
+	}
 </script>
 
 <%@ include file="/WEB-INF/views/footer.jsp" %>
