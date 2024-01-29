@@ -32,7 +32,7 @@
     <div class="row">
         <c:forEach items="${ pokemons }" var="pokemon">
              <div class="col-md-2 mb-4">
-                <a href="./dex/page/${pokemon.pokemonId}" class="text-decoration-none text-dark"> 
+                <a href="/Pokedex/mvc/frontend/dex/page/${pokemon.pokemonId}" class="text-decoration-none text-dark"> 
                     <div class="card border border-3">
                         <img class="card-img-top" 
                              src="/Pokedex/images/<fmt:formatNumber type="number" minIntegerDigits="4" groupingUsed="false" value="${pokemon.pokemonId}"/>.png" 

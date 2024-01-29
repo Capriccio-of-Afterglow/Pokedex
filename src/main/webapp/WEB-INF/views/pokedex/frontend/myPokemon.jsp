@@ -46,7 +46,7 @@
 										type="text" id="newCp${pokeball.pokeballId}" name="newCp">
 
 									<button type="button" class="btn btn-primary"
-										onclick="updateCP(${pokeball.userId}, ${pokeball.pokeballId})">保存變更</button>
+										onclick="updateCP(${pokeball.userId}, ${pokeball.pokeballId})">修改</button>
 								</form>
 
 							</div>
