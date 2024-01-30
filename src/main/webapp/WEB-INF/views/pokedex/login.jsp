@@ -67,7 +67,7 @@ input {
 					placeholder="請輸入帳號" value="user1" required />
 				<p />
 				🔑 密碼: <input type="password" id="password" name="password"
-					placeholder="請輸入密碼" value="123" required />
+					placeholder="請輸入密碼"  required />
 				<p />
 				<p />
 				<button type="submit" class="pure-button pure-button-primary">登入</button>

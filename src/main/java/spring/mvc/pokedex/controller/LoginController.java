@@ -38,7 +38,7 @@ public class LoginController {
 		// 驗證帳密
 		Optional<User> userOpt = userDao.findUserByUsername(username);
 		if(userOpt.isEmpty()) {
-			model.addAttribute("error", "無此帳號");
+			model.addAttribute("error", "帳號或密碼輸入錯誤");
 			return "/pokedex/login";
 		}
 		

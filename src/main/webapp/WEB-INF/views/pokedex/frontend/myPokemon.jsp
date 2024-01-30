@@ -90,7 +90,7 @@ function updateCP(userId, pokeballId) {
                 Swal.fire({
                     icon: 'error',
                     title: 'CP 更新失敗',
-                    text: response.message,
+                    text: 'CP值不能為空！',
                 });
             }
         },
